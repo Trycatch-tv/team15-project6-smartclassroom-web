@@ -17,8 +17,12 @@ steps:
 
 - script: |
     npm install
-    npm run build
+    # npm run build
   displayName: 'npm install and build'
+
+- script: 
+    set "REACT_APP_STAGE=$(stage)" && npm run build
+  displayName: 'npm build'
 
 - task: ArchiveFiles@2
   displayName: 'Archive files'
