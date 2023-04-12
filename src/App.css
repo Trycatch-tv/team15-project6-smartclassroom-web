@@ -1,3 +1,4 @@
+/*
 .App {
   text-align: center;
 }
@@ -19,7 +20,11 @@
 .App-link {
   color: #61dafb;
 }
-
+*/
 body{
   background-color: #fff;
+}
+.mainContainer{
+  margin-left: 176px;
+  padding-top: 76px;
 }
