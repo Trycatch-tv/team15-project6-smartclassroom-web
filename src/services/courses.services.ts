@@ -25,5 +25,9 @@ class CourseDataService {
   deleteAll() {
     return http.delete<any>(`/courses`);
   }
+
+  findByTitle(title: string) {
+    return http.get<Array<ICourseData>>(`/courses?title=${title}`);
+  }
 }
 export default new CourseDataService();
