@@ -1,9 +1,9 @@
 import "./App.css";
 import Box from "@mui/material/Box";
-import Footer from "./components/Footer/footer";
-import TopBar from "./components/Topbar/topbar";
+import Footer from "./components/generic/Footer";
+import TopBar from "./components/generic/TopBar";
 import List2 from "./components/courses/list2";
-import LeftMenu from "./components/LeftMenu";
+import LeftMenu from "./components/generic/LeftMenu";
 import { Container, Divider } from "@mui/material";
 
 function App() {
