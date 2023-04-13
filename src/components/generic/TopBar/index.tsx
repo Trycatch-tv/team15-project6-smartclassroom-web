@@ -13,7 +13,9 @@ export default function TopBar() {
                   pr: '24px',
                 }}
             >
-                <a href="/" title="Smart Classroom"><img src={logo} alt='Smart Classroom' className='applogo'/></a>
+                <a href="/" title="Smart Classroom">
+                    <img src={logo} alt='Smart Classroom' className='applogo'/>
+                </a>
                 <Typography
                     component="h1"
                     variant="h6"
@@ -21,7 +23,6 @@ export default function TopBar() {
                     noWrap
                     sx={{ flexGrow: 1 }}
                     >
-                Classroom
                 </Typography>
             </Toolbar>
         </AppBar>
