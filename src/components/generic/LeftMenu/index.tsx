@@ -50,4 +50,5 @@ export default function LeftMenu() {
             </ListItemButton>
         </List>
     </Drawer>
+  );
 }

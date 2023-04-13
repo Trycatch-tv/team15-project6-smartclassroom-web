@@ -1,37 +1,41 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import Link from '@mui/material/Link';
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import Link from "@mui/material/Link";
 
 export default function Footer() {
   return (
     <Box
-    component="footer"
-    sx={{
+      component="footer"
+      sx={{
         py: 3,
         px: 2,
-        mt: 'auto',
-        display: 'flex',
-        position: 'absolute',
+        mt: "auto",
+        display: "flex",
+        position: "absolute",
         bottom: 0,
         left: 0,
         right: 0,
         backgroundColor: (theme) =>
-        theme.palette.mode === 'light'
+          theme.palette.mode === "light"
             ? theme.palette.grey[200]
             : theme.palette.grey[800],
-    }}
+      }}
     >
-    <Container>
+      <Container>
         <Typography variant="body2" color="text.secondary" align="center">
-            {'Copyright © '}
-            <Link color="inherit" href="https://github.com/Trycatch-tv">
-            Trycatch-tv
-            </Link>{' '}
-            {new Date().getFullYear()}.
+          {"Copyright © "}
+          <Link
+            color="inherit"
+            href=" https://github.com/Trycatch-tv/team15-project6-smartclassroom-web"
+          >
+            Smart Classroom
+          </Link>{" "}
+          {/* TODO: Add icon to github (?) */}
+          {new Date().getFullYear()}.
         </Typography>
-    </Container>
+      </Container>
     </Box>
   );
 }
