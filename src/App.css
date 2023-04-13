@@ -30,6 +30,8 @@ body {
   background-color: #fff;
 }
 .mainContainer{
-  margin-left: 159px;
+  margin-left: 200px !important;
   padding-top: 76px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
