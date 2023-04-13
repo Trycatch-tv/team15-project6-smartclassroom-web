@@ -16,6 +16,7 @@ import moment from "moment";
 import "./list.css";
 import EditIcon from "@mui/icons-material/EditNote";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { red } from "@mui/material/colors";
 
 type Props = {};
 
@@ -125,7 +126,7 @@ export default class List2 extends Component<Props, State> {
                 <TableCell align="left">Start Date</TableCell>
                 <TableCell align="left">End Date</TableCell>
                 <TableCell align="left">Teacher</TableCell>
-                <TableCell align="left">Action</TableCell>
+                <TableCell></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
