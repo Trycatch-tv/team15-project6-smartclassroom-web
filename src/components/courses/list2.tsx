@@ -121,11 +121,11 @@ export default class List2 extends Component<Props, State> {
           <Table size="small">
             <TableHead>
               <TableRow>
-                <TableCell align="left">Name</TableCell>
-                <TableCell align="left">Description</TableCell>
-                <TableCell align="left">Start Date</TableCell>
-                <TableCell align="left">End Date</TableCell>
-                <TableCell align="left">Teacher</TableCell>
+                <TableCell align="left">Curso</TableCell>
+                <TableCell align="left">Descripción</TableCell>
+                <TableCell align="left">Fecha de inicio</TableCell>
+                <TableCell align="left">Fecha de finalización</TableCell>
+                <TableCell align="left">Profesor</TableCell>
                 <TableCell></TableCell>
               </TableRow>
             </TableHead>

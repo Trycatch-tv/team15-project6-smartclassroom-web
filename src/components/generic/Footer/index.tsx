@@ -25,15 +25,11 @@ export default function Footer() {
     >
       <Container>
         <Typography variant="body2" color="text.secondary" align="center">
-          {"Copyright © "}
-          <Link
-            color="inherit"
-            href=" https://github.com/Trycatch-tv/team15-project6-smartclassroom-web"
-          >
-            Smart Classroom
-          </Link>{" "}
-          {/* TODO: Add icon to github (?) */}
-          {new Date().getFullYear()}.
+          {"Conoce más sobre este proyecto "}
+          <Link color="inherit" href="/about-us">
+            aquí
+          </Link>
+          {"."}
         </Typography>
       </Container>
     </Box>

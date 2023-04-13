@@ -1,0 +1,9 @@
+.side-bar {
+  width: 200px;
+  padding: 5% 0;
+  box-sizing: border-box;
+}
+
+.icon {
+  padding-left: 12%;
+}
