@@ -1,4 +1,4 @@
-  import * as React from 'react';
+import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -6,8 +6,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import  './index.css';
-import logo from './logo.svg';
-import Link from 'react-router';
+import logo from './../../../logo.svg';
 
 export default function TopBar() {
   
@@ -18,7 +17,7 @@ export default function TopBar() {
                   pr: '24px', // keep right padding when drawer closed
                 }}
             >
-                <a href="/react" title="Smart Class Room"><img src={logo} alt='Smart Class Room' className='applogo'/></a>
+                <a href="/" title="Smart Class Room"><img src={logo} alt='Smart Class Room' className='applogo'/></a>
                 <Typography
                     component="h1"
                     variant="h6"
