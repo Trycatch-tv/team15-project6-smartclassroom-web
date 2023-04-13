@@ -1,0 +1,9 @@
+.date {
+  width: 10%;
+}
+
+.action-column {
+  display: flex;
+  justify-content: space-around;
+  padding: 50% 0%;
+}

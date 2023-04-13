@@ -21,10 +21,15 @@
   color: #61dafb;
 }
 */
-body{
+
+* {
+  box-sizing: border-box;
+}
+
+body {
   background-color: #fff;
 }
-.mainContainer{
+.mainContainer {
   margin-left: 176px;
   padding-top: 76px;
 }
