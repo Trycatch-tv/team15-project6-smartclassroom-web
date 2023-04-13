@@ -12,8 +12,6 @@ import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import PeopleIcon from "@mui/icons-material/People";
 import InfoIcon from "@mui/icons-material/Info";
 import "./index.css";
-
-import "./index.css";
 export default function LeftMenu() {
   return (
     <Drawer variant="permanent">
@@ -38,7 +36,6 @@ export default function LeftMenu() {
           <ListItemIcon className="icon">
             <InfoIcon />
           </ListItemIcon>
-          {/*TODO: change link to about-us*/}
           <Link href="/about-us" underline="none">
             <ListItemText secondary="Sobre nosotros" />
           </Link>

@@ -3,7 +3,6 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";
-import GitHubIcon from "@mui/icons-material/GitHub";
 
 export default function Footer() {
   return (
@@ -26,8 +25,8 @@ export default function Footer() {
     >
       <Container>
         <Typography variant="body2" color="text.secondary" align="center">
-          {"Conoce más sobre estre proyecto "}
-          <Link color="inherit" href=" ">
+          {"Conoce más sobre este proyecto "}
+          <Link color="inherit" href="/about-us">
             aquí
           </Link>
           {"."}

@@ -10,7 +10,7 @@ const Loader = (Component: any) => (props: JSX.IntrinsicAttributes) =>
     </Suspense>
   );
 
-const DashBoard = Loader(lazy(() => import("./components/dashboard/index")));
+const AboutUs = Loader(lazy(() => import("./components/aboutUs/index")));
 const CoursesList = Loader(lazy(() => import("./components/courses/list2")));
 const CoursesEdit = Loader(lazy(() => import("./components/courses/edit")));
 const CoursesCreate = Loader(lazy(() => import("./components/courses/create")));
@@ -30,11 +30,11 @@ const StudentsUserEdit = Loader(
   lazy(() => import("./components/students/useredit"))
 );
 
-const TeacherList = Loader(lazy(() => import("./components/teachers/list")));
-const TeacherEdit = Loader(lazy(() => import("./components/teachers/edit")));
-const TeacherCreate = Loader(
-  lazy(() => import("./components/teachers/create"))
-);
+// const TeacherList = Loader(lazy(() => import("./components/teachers/list")));
+// const TeacherEdit = Loader(lazy(() => import("./components/teachers/edit")));
+// const TeacherCreate = Loader(
+//   lazy(() => import("./components/teachers/create"))
+// );
 
 // Status
 const Status404 = Loader(
@@ -50,36 +50,27 @@ const StatusMaintenance = Loader(
 const routes: RouteObject[] = [
   {
     path: "",
-    element: <DashBoard />,
+    element: <CoursesList />,
     children: [
       {
-        path: "/",
-        element: <DashBoard />,
+        path: "",
+        element: <Navigate to="courses" replace />,
       },
       {
-        path: "status",
-        children: [
-          {
-            path: "",
-            element: <Navigate to="404" replace />,
-          },
-          {
-            path: "404",
-            element: <Status404 />,
-          },
-          {
-            path: "500",
-            element: <Status500 />,
-          },
-          {
-            path: "maintenance",
-            element: <StatusMaintenance />,
-          },
-        ],
+        path: "List",
+        element: <CoursesList />,
       },
       {
-        path: "*",
-        element: <Status404 />,
+        path: "create",
+        element: <CoursesCreate />,
+      },
+      {
+        path: "edit",
+        element: <CoursesEdit />,
+      },
+      {
+        path: "report",
+        element: <CoursesReport />,
       },
     ],
   },
@@ -109,32 +100,32 @@ const routes: RouteObject[] = [
       },
     ],
   },
-  {
-    path: "grades",
-    element: <GradesList />,
-    children: [
-      {
-        path: "",
-        element: <Navigate to="grades" replace />,
-      },
-      {
-        path: "List",
-        element: <GradesList />,
-      },
-      {
-        path: "create",
-        element: <GradesCreate />,
-      },
-      {
-        path: "edit",
-        element: <GradesEdit />,
-      },
-      {
-        path: "report",
-        element: <GradesReport />,
-      },
-    ],
-  },
+  // {
+  //   path: "grades",
+  //   element: <GradesList />,
+  //   children: [
+  //     {
+  //       path: "",
+  //       element: <Navigate to="grades" replace />,
+  //     },
+  //     {
+  //       path: "List",
+  //       element: <GradesList />,
+  //     },
+  //     {
+  //       path: "create",
+  //       element: <GradesCreate />,
+  //     },
+  //     {
+  //       path: "edit",
+  //       element: <GradesEdit />,
+  //     },
+  //     {
+  //       path: "report",
+  //       element: <GradesReport />,
+  //     },
+  //   ],
+  // },
   {
     path: "students",
     element: <StudentsList />,
@@ -162,27 +153,37 @@ const routes: RouteObject[] = [
     ],
   },
   {
-    path: "teachers",
-    element: <TeacherList />,
+    path: "about-us",
+    element: <AboutUs />,
     children: [
       {
         path: "",
-        element: <Navigate to="teachers" replace />,
-      },
-      {
-        path: "List",
-        element: <TeacherList />,
-      },
-      {
-        path: "create",
-        element: <TeacherCreate />,
-      },
-      {
-        path: "edit",
-        element: <TeacherEdit />,
-      },
+        element: <Navigate to="about-us" replace />,
+      }
     ],
-  },
+  }
+  // {
+  //   path: "teachers",
+  //   element: <TeacherList />,
+  //   children: [
+  //     {
+  //       path: "",
+  //       element: <Navigate to="teachers" replace />,
+  //     },
+  //     {
+  //       path: "List",
+  //       element: <TeacherList />,
+  //     },
+  //     {
+  //       path: "create",
+  //       element: <TeacherCreate />,
+  //     },
+  //     {
+  //       path: "edit",
+  //       element: <TeacherEdit />,
+  //     },
+  //   ],
+  // },
 ];
 
 export default routes;
