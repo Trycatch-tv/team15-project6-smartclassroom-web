@@ -11,14 +11,15 @@ import {
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import PeopleIcon from "@mui/icons-material/People";
 import InfoIcon from "@mui/icons-material/Info";
+import "./index.css";
 
 import "./index.css";
 export default function LeftMenu() {
   return (
     <Drawer variant="permanent">
-      <List component="nav">
+      <List component="nav" className="side-bar">
         <ListItemButton>
-          <ListItemIcon>
+          <ListItemIcon className="icon">
             <LocalLibraryIcon />
           </ListItemIcon>
           <Link href="/courses" underline="none">
@@ -26,7 +27,7 @@ export default function LeftMenu() {
           </Link>
         </ListItemButton>
         <ListItemButton>
-          <ListItemIcon>
+          <ListItemIcon className="icon">
             <PeopleIcon />
           </ListItemIcon>
           <Link href="/students" underline="none">
@@ -34,11 +35,11 @@ export default function LeftMenu() {
           </Link>
         </ListItemButton>
         <ListItemButton>
-          <ListItemIcon>
+          <ListItemIcon className="icon">
             <InfoIcon />
           </ListItemIcon>
           {/*TODO: change link to about-us*/}
-          <Link href="/teachers" underline="none">
+          <Link href="/about-us" underline="none">
             <ListItemText secondary="Sobre nosotros" />
           </Link>
         </ListItemButton>

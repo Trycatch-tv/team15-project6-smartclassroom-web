@@ -29,15 +29,8 @@ export default function Footer() {
           {"Conoce más sobre estre proyecto "}
           <Link color="inherit" href=" ">
             aquí
-          </Link>{" "}
-          {new Date().getFullYear()}.
-          <Link
-            color="inherit"
-            href="https://github.com/Trycatch-tv/team15-project6-smartclassroom-web"
-          >
-            {" "}
-            <GitHubIcon />{" "}
           </Link>
+          {"."}
         </Typography>
       </Container>
     </Box>
