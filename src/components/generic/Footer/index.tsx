@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";
+import GitHubIcon from "@mui/icons-material/GitHub";
 
 export default function Footer() {
   return (
@@ -25,15 +26,18 @@ export default function Footer() {
     >
       <Container>
         <Typography variant="body2" color="text.secondary" align="center">
-          {"Copyright © "}
+          {"Conoce más sobre estre proyecto "}
+          <Link color="inherit" href=" ">
+            aquí
+          </Link>{" "}
+          {new Date().getFullYear()}.
           <Link
             color="inherit"
-            href=" https://github.com/Trycatch-tv/team15-project6-smartclassroom-web"
+            href="https://github.com/Trycatch-tv/team15-project6-smartclassroom-web"
           >
-            Smart Classroom
-          </Link>{" "}
-          {/* TODO: Add icon to github (?) */}
-          {new Date().getFullYear()}.
+            {" "}
+            <GitHubIcon />{" "}
+          </Link>
         </Typography>
       </Container>
     </Box>
