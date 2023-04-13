@@ -1,9 +1,10 @@
 .log {
   width: 50px;
 }
-.applogo {
-  width: 100px;
-  padding-right: 10px;
+.applogo{
+    width: 100px;
+    padding-right: 10px;
+    padding-top: 10px;
 }
 .topheader {
   left: 200px !important;
