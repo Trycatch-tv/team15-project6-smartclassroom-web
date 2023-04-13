@@ -21,7 +21,7 @@ export default function TopBar() {
                     noWrap
                     sx={{ flexGrow: 1 }}
                     >
-                
+                Classroom
                 </Typography>
             </Toolbar>
         </AppBar>
