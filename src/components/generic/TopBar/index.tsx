@@ -44,9 +44,6 @@ export default function TopBar() {
                     sx={{ flexGrow: 1 }}
                     >
                 </Typography>
-                <IconButton color="inherit">
-                    <AccountCircleIcon />
-                </IconButton>
             </Toolbar>
         </AppBar>
     );
