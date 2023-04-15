@@ -5,7 +5,6 @@ import Link from "@mui/material/Link";
 import { Helmet } from 'react-helmet-async';
 import CoursesWidget from "./coursesWidget";
 import StudentsWidget from "./studentsWidget";
-import TeacherWidget from "./teacherWidget";
 
 export default function Footer() {
     return (
@@ -27,9 +26,6 @@ export default function Footer() {
           </Grid>
           <Grid item xs={4}>
             <StudentsWidget />
-          </Grid>
-          <Grid item xs={4}>
-            <TeacherWidget />
           </Grid>
         </Grid>
       </Container>

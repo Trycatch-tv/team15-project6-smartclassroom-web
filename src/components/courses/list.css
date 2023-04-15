@@ -1,9 +1,9 @@
-.date {
-  width: 10%;
+.noWrap {
+  white-space: nowrap;
 }
-
-.action-column {
-  display: flex;
-  justify-content: space-around;
-  padding: 50% 0%;
+.listButton{
+  padding-Left: 8px;
+  padding-Right: 8px;
+  min-Width: 32px;
+  margin-left: 3px;
 }

@@ -7,7 +7,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import  './index.css';
 import logo from './../../../logo.svg';
 import { IconButton, Badge } from "@mui/material";
-import NotificationsIcon from '@mui/icons-material/Notifications';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 export default function TopBar() {
     const [open, setOpen] = React.useState(true);
@@ -45,9 +45,7 @@ export default function TopBar() {
                     >
                 </Typography>
                 <IconButton color="inherit">
-                    <Badge badgeContent={4} color="secondary">
-                        <NotificationsIcon />
-                    </Badge>
+                    <AccountCircleIcon />
                 </IconButton>
             </Toolbar>
         </AppBar>

@@ -61,7 +61,7 @@ const routes: RouteObject[] = [
         element: <Navigate to="courses" replace />,
       },
       {
-        path: "List",
+        path: "list",
         element: <CoursesList />,
       },
       {
@@ -113,7 +113,7 @@ const routes: RouteObject[] = [
         element: <Navigate to="students" replace />,
       },
       {
-        path: "List",
+        path: "list",
         element: <StudentsList />,
       },
       {

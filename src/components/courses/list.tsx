@@ -10,13 +10,12 @@ import {
   TableHead,
   TableRow, ButtonGroup, Button,Typography
 } from "@mui/material";
-import Paper, { PaperProps } from '@mui/material/Paper';
+import Paper from '@mui/material/Paper';
 import moment from "moment";
 import "./list.css";
-import { Title } from "@mui/icons-material";
 import EditIcon from "@mui/icons-material/EditNote";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { red } from "@mui/material/colors";
+import { Helmet } from 'react-helmet-async';
 //https://mui.com/material-ui/react-table/
 type Props = {};
 
@@ -117,57 +116,60 @@ export default class List extends Component<Props, State> {
   render() {
     const { searchTitle, courses, currentTutorial, currentIndex } = this.state;
     return (
-      <Paper elevation={1} >
-        <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
-            noWrap
-            sx={{ flexGrow: 1, paddingLeft: '25px', paddingTop: '15px' }}
-            > Cursos
-        </Typography>
-        <Grid item xs={12}>
-          <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-            <Table size="small">
-              <TableHead>
-                <TableRow>
-                  <TableCell align="left">Curso</TableCell>
-                  <TableCell align="left">Descripción</TableCell>
-                  <TableCell align="left">Fecha de inicio</TableCell>
-                  <TableCell align="left">Fecha de finalización</TableCell>
-                  <TableCell align="left">Profesor</TableCell>
-                  <TableCell></TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {courses.map((course: ICourseData, index: number) => (
-                  <TableRow key={course.id}>
-                    <TableCell component="th" scope="row">
-                      {course.name}
-                    </TableCell>
-                    <TableCell align="left">{course.description}</TableCell>
-                    <TableCell className="date" align="left">
-                      {moment(course.startDate).format("YYYY-MM-DD")}
-                    </TableCell>
-                    <TableCell className="date" align="left">
-                      {moment(course.endDate).format("YYYY-MM-DD")}
-                    </TableCell>
-                    <TableCell align="left">{course.teacher}</TableCell>
-                    <TableCell className="action-column">
-                      <ButtonGroup variant="contained" aria-label="outlined primary button group">
-                        <Button color="secondary"><EditIcon /></Button>
-                        <Button color="error" onClick={()=>{
-                            this.removeCourse(course.id);
-                          }}><DeleteIcon /></Button>
-                      </ButtonGroup>
-                    </TableCell>
+      <>
+        <Helmet>
+          <title>Dashboard</title>
+        </Helmet>
+        <Paper elevation={1} >
+          <Typography
+              component="h1"
+              variant="h6"
+              color="inherit"
+              noWrap
+              sx={{ flexGrow: 1, paddingLeft: '25px', paddingTop: '15px' }}
+              > Cursos
+          </Typography>
+          <Grid item xs={12}>
+            <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
+              <Table size="small">
+                <TableHead>
+                  <TableRow>
+                    <TableCell align="left">Curso</TableCell>
+                    <TableCell align="left">Descripción</TableCell>
+                    <TableCell align="left" className="noWrap">Fecha de inicio</TableCell>
+                    <TableCell align="left" className="noWrap">Fecha de finalización</TableCell>
+                    <TableCell align="left">Profesor</TableCell>
+                    <TableCell></TableCell>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </Paper>
-        </Grid>
-    </Paper>
+                </TableHead>
+                <TableBody>
+                  {courses.map((course: ICourseData, index: number) => (
+                    <TableRow key={course.id}>
+                      <TableCell component="th" scope="row">
+                        {course.name}
+                      </TableCell>
+                      <TableCell align="left">{course.description}</TableCell>
+                      <TableCell align="left">
+                        {moment(course.startDate).format("YYYY-MM-DD")}
+                      </TableCell>
+                      <TableCell align="left">
+                        {moment(course.endDate).format("YYYY-MM-DD")}
+                      </TableCell>
+                      <TableCell align="left">{course.teacher}</TableCell>
+                      <TableCell className="noWrap">
+                          <Button variant="contained" color="secondary" className='listButton'><EditIcon /></Button>
+                          <Button variant="contained" color="error" className='listButton' onClick={()=>{
+                              this.removeCourse(course.id);
+                            }}><DeleteIcon /></Button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </Paper>
+          </Grid>
+      </Paper>
+      </>
     );
   }
 }
