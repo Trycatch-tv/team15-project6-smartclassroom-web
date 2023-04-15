@@ -11,7 +11,7 @@ const Loader = (Component: any) => (props: JSX.IntrinsicAttributes) =>
   );
 
 const AboutUs = Loader(lazy(() => import("./components/aboutUs/index")));
-const CoursesList = Loader(lazy(() => import("./components/courses/list2")));
+const CoursesList = Loader(lazy(() => import("./components/courses/list")));
 const CoursesEdit = Loader(lazy(() => import("./components/courses/edit")));
 const CoursesCreate = Loader(lazy(() => import("./components/courses/create")));
 const CoursesReport = Loader(lazy(() => import("./components/courses/report")));
@@ -23,54 +23,32 @@ const GradesReport = Loader(lazy(() => import("./components/grades/report")));
 
 const StudentsList = Loader(lazy(() => import("./components/students/list")));
 const StudentsEdit = Loader(lazy(() => import("./components/students/edit")));
-const StudentsCreate = Loader(
-  lazy(() => import("./components/students/create"))
-);
-const StudentsUserEdit = Loader(
-  lazy(() => import("./components/students/useredit"))
-);
+const StudentsCreate = Loader( lazy(() => import("./components/students/create")));
+const StudentsUserEdit = Loader( lazy(() => import("./components/students/useredit")));
 
-// const TeacherList = Loader(lazy(() => import("./components/teachers/list")));
-// const TeacherEdit = Loader(lazy(() => import("./components/teachers/edit")));
-// const TeacherCreate = Loader(
-//   lazy(() => import("./components/teachers/create"))
-// );
+const TeacherList = Loader(lazy(() => import("./components/teachers/list")));
+const TeacherEdit = Loader(lazy(() => import("./components/teachers/edit")));
+const TeacherCreate = Loader( lazy(() => import("./components/teachers/create")));
+
+const Dashboard = Loader(lazy(() => import("./components/dashboard/index")));
 
 // Status
-const Status404 = Loader(
-  lazy(() => import("./components/generic/Status/Status404"))
-);
-const Status500 = Loader(
-  lazy(() => import("./components/generic/Status/Status500"))
-);
-const StatusMaintenance = Loader(
-  lazy(() => import("./components/generic/Status/Maintenance"))
-);
+const Status404 = Loader(lazy(() => import("./components/generic/Status/Status404")));
+const Status500 = Loader(lazy(() => import("./components/generic/Status/Status500")));
+const StatusMaintenance = Loader(lazy(() => import("./components/generic/Status/Maintenance")));
 
 const routes: RouteObject[] = [
   {
     path: "",
-    element: <CoursesList />,
+    element: <Dashboard />,
     children: [
       {
         path: "",
-        element: <Navigate to="courses" replace />,
+        element: <Navigate to="dashboard" replace />,
       },
       {
-        path: "List",
-        element: <CoursesList />,
-      },
-      {
-        path: "create",
-        element: <CoursesCreate />,
-      },
-      {
-        path: "edit",
-        element: <CoursesEdit />,
-      },
-      {
-        path: "report",
-        element: <CoursesReport />,
+        path: "dashboard",
+        element: <Dashboard />,
       },
     ],
   },
