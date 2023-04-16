@@ -1,11 +1,8 @@
 .log {
   width: 50px;
 }
-.applogo{
-    width: 300px;
+.applogo {
+    width: 240px;
     padding-right: 10px;
     padding-top: 10px;
-}
-.topheader {
-  left: 200px !important;
 }

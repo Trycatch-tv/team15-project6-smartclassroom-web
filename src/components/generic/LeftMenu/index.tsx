@@ -1,3 +1,4 @@
+import * as React from 'react';
 import {
   Divider,
   Drawer,
@@ -11,11 +12,21 @@ import {
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import PeopleIcon from "@mui/icons-material/People";
 import InfoIcon from "@mui/icons-material/Info";
+import DashboardIcon from '@mui/icons-material/Dashboard';
 import "./index.css";
 export default function LeftMenu() {
+  const [open, setOpen] = React.useState(true);
   return (
-    <Drawer variant="permanent">
+    <Drawer variant="permanent" open={open} className='leftMenu'>
       <List component="nav" className="side-bar">
+        <ListItemButton>
+          <ListItemIcon className="icon">
+            <DashboardIcon />
+          </ListItemIcon>
+          <Link href="/dashboard" underline="none">
+            <ListItemText secondary="Dashboard" />
+          </Link>
+        </ListItemButton>
         <ListItemButton>
           <ListItemIcon className="icon">
             <LocalLibraryIcon />
