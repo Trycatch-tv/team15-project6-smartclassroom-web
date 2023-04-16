@@ -1,66 +1,74 @@
 [
     {
-        "image": "https://www.unimed.coop.br/site/documents/3643882/0/retrato-jovem-homem-camisa-xadrez-segurando-laptop.jpg",
-        "name": "Luis Lopez",
+        "image": "LuisDavidLopezZapata.jpg",
+        "name": "Luis David López Zapata",
+        "email":"luisdavidlz0202@gmail.com",
         "position": "Team Lead",
-        "description": "Descripción 1",
-        "gitHub": "URL 1",
-        "linkedIn": "URL 1"
+        "description": "",
+        "gitHub": "https://github.com/luisdavid0202",
+        "linkedIn": "https://www.linkedin.com/in/luis-david-lopez-zapata-7377a0153/"
     },
     {
-        "image": "https://www.unimed.coop.br/site/documents/3643882/0/retrato-jovem-homem-camisa-xadrez-segurando-laptop.jpg",
-        "name": "Carlos Nino",
+        "image": "default.png",
+        "name": "Carlos Andrés Niño Sosa",
+        "email":"sqsandres@gmail.com",
         "position": "Frontend Developer",
-        "description": "Descripción 2",
-        "gitHub": "URL 2",
-        "linkedIn": "URL 2"
+        "description": "",
+        "gitHub": "https://github.com/sqsandres",
+        "linkedIn": ""
     },
     {
-        "image": "https://www.unimed.coop.br/site/documents/3643882/0/retrato-jovem-homem-camisa-xadrez-segurando-laptop.jpg",
+        "image": "JoshuaArfaxadAcevedoOrtíz.JPG",
+        "name": "Joshua Arfaxad Acevedo Ortíz",
+        "email":"joshuaacevor@gmail.com",
+        "position": "Backend Developer",
+        "description": "",
+        "gitHub": "https://github.com/joshArfDev",
+        "linkedIn": "https://www.linkedin.com/in/joshuaarfa/"
+    },
+    {
+        "image": "default.png",
         "name": "Eynar Alvarez",
+        "email":"eynar.j.alvarez.m@gmail.com",
         "position": "Frontend Developer",
-        "description": "Descripción 3",
-        "gitHub": "URL 3",
-        "linkedIn": "URL 3"
+        "description": "",
+        "gitHub": "https://github.com/Eynar92",
+        "linkedIn": ""
     },
     {
-        "image": "https://www.unimed.coop.br/site/documents/3643882/0/retrato-jovem-homem-camisa-xadrez-segurando-laptop.jpg",
-        "name": "Dylan Suarez",
+        "image": "LuisDavidRodríguezPacheco.png",
+        "name": "Luis David Rodríguez Pacheco",
+        "email":"luisdarodriguez164@gmail.com",
+        "position": "Backend Developer",
+        "description": "",
+        "gitHub": "https://github.com/luisdav1",
+        "linkedIn": "https://www.linkedin.com/in/luis-rodr%C3%ADguez-082402248/"
+    },
+    {
+        "image": "default.png",
+        "name": "Dylan Steven Suarez Cruz",
+        "email":"2000sajo@gmail.com",
         "position": "Full-Stack Developer",
-        "description": "Descripción 3",
-        "gitHub": "URL 3",
-        "linkedIn": "URL 3"
+        "description": "",
+        "gitHub": "https://github.com/DyEsSuCr",
+        "linkedIn": "https://www.linkedin.com/in/dyessucr/"
     },
     {
-        "image": "https://www.unimed.coop.br/site/documents/3643882/0/retrato-jovem-homem-camisa-xadrez-segurando-laptop.jpg",
-        "name": "Manuela Gómez",
-        "position": "Frontend Developer",
-        "description": "Descripción 3",
-        "gitHub": "URL 3",
-        "linkedIn": "URL 3"
-    },
-    {
-        "image": "https://www.unimed.coop.br/site/documents/3643882/0/retrato-jovem-homem-camisa-xadrez-segurando-laptop.jpg",
+        "image": "default.png",
         "name": "Giovanny Gómez",
-        "position": "DB Owner",
-        "description": "Descripción 3",
-        "gitHub": "URL 3",
-        "linkedIn": "URL 3"
+        "email":"maacg.ia@gmail.com",
+        "position": "Backend Developer",
+        "description": "",
+        "gitHub": "https://github.com/maacgia",
+        "linkedIn": ""
     },
     {
-        "image": "https://www.unimed.coop.br/site/documents/3643882/0/retrato-jovem-homem-camisa-xadrez-segurando-laptop.jpg",
-        "name": "Joshua Acevedo",
-        "position": "Backend Developer",
-        "description": "Descripción 3",
-        "gitHub": "URL 3",
-        "linkedIn": "URL 3"
-    },
-    {
-        "image": "https://www.unimed.coop.br/site/documents/3643882/0/retrato-jovem-homem-camisa-xadrez-segurando-laptop.jpg",
-        "name": "Luis Rodríguez",
-        "position": "Backend Developer",
-        "description": "Descripción 3",
-        "gitHub": "URL 3",
-        "linkedIn": "URL 3"
+        "image": "default.png",
+        "name": "Manuela Gómez",
+        "email":"manu.gomez.e@gmail.com",
+        "position": "Frontend Developer",
+        "description": "",
+        "gitHub": "",
+        "linkedIn": ""
     }
 ]
