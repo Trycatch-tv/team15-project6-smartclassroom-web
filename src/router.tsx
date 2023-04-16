@@ -11,7 +11,7 @@ const Loader = (Component: any) => (props: JSX.IntrinsicAttributes) =>
   );
 
 const AboutUs = Loader(lazy(() => import("./components/about-us/aboutUs")));
-const CoursesList = Loader(lazy(() => import("./components/courses/list2")));
+const CoursesList = Loader(lazy(() => import("./components/courses/list")));
 const CoursesEdit = Loader(lazy(() => import("./components/courses/edit")));
 const CoursesCreate = Loader(lazy(() => import("./components/courses/create")));
 const CoursesReport = Loader(lazy(() => import("./components/courses/report")));
