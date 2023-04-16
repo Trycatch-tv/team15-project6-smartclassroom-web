@@ -1,0 +1,66 @@
+[
+    {
+        "image": "https://www.unimed.coop.br/site/documents/3643882/0/retrato-jovem-homem-camisa-xadrez-segurando-laptop.jpg",
+        "name": "Luis Lopez",
+        "position": "Team Lead",
+        "description": "Descripción 1",
+        "gitHub": "URL 1",
+        "linkedIn": "URL 1"
+    },
+    {
+        "image": "https://www.unimed.coop.br/site/documents/3643882/0/retrato-jovem-homem-camisa-xadrez-segurando-laptop.jpg",
+        "name": "Carlos Nino",
+        "position": "Frontend Developer",
+        "description": "Descripción 2",
+        "gitHub": "URL 2",
+        "linkedIn": "URL 2"
+    },
+    {
+        "image": "https://www.unimed.coop.br/site/documents/3643882/0/retrato-jovem-homem-camisa-xadrez-segurando-laptop.jpg",
+        "name": "Eynar Alvarez",
+        "position": "Frontend Developer",
+        "description": "Descripción 3",
+        "gitHub": "URL 3",
+        "linkedIn": "URL 3"
+    },
+    {
+        "image": "https://www.unimed.coop.br/site/documents/3643882/0/retrato-jovem-homem-camisa-xadrez-segurando-laptop.jpg",
+        "name": "Dylan Suarez",
+        "position": "Full-Stack Developer",
+        "description": "Descripción 3",
+        "gitHub": "URL 3",
+        "linkedIn": "URL 3"
+    },
+    {
+        "image": "https://www.unimed.coop.br/site/documents/3643882/0/retrato-jovem-homem-camisa-xadrez-segurando-laptop.jpg",
+        "name": "Manuela Gómez",
+        "position": "Frontend Developer",
+        "description": "Descripción 3",
+        "gitHub": "URL 3",
+        "linkedIn": "URL 3"
+    },
+    {
+        "image": "https://www.unimed.coop.br/site/documents/3643882/0/retrato-jovem-homem-camisa-xadrez-segurando-laptop.jpg",
+        "name": "Giovanny Gómez",
+        "position": "DB Owner",
+        "description": "Descripción 3",
+        "gitHub": "URL 3",
+        "linkedIn": "URL 3"
+    },
+    {
+        "image": "https://www.unimed.coop.br/site/documents/3643882/0/retrato-jovem-homem-camisa-xadrez-segurando-laptop.jpg",
+        "name": "Joshua Acevedo",
+        "position": "Backend Developer",
+        "description": "Descripción 3",
+        "gitHub": "URL 3",
+        "linkedIn": "URL 3"
+    },
+    {
+        "image": "https://www.unimed.coop.br/site/documents/3643882/0/retrato-jovem-homem-camisa-xadrez-segurando-laptop.jpg",
+        "name": "Luis Rodríguez",
+        "position": "Backend Developer",
+        "description": "Descripción 3",
+        "gitHub": "URL 3",
+        "linkedIn": "URL 3"
+    }
+]
