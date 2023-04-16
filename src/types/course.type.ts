@@ -5,4 +5,9 @@ export interface ICourseData {
   startDate: Date,
   endDate: Date,
   teacher: string,
+  students: IStudentData[]
+}
+interface IStudentData {
+  studentId?: any | null,
+  name: string
 }

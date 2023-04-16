@@ -12,7 +12,7 @@ import theme from './theme';
 function App() {
   const content = useRoutes(router);
   return (
-    <ThemeProvider theme={theme}>
+        <ThemeProvider theme={theme}>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <TopBar></TopBar>
