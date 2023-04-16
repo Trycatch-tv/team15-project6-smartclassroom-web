@@ -30,7 +30,7 @@ export const HeaderComponent: React.FC<HeaderProps> = ({ title, description/*, e
                                 <Typography fontWeight="bold" variant="h2">{title}</Typography>
                             </Grid>
                             <Grid item sx={{ mt: 1, mb:2 }}>
-                                <Typography fontSize={18}>{description}</Typography>
+                                <Typography textAlign={"justify"} fontSize={18}>{description}</Typography>
                             </Grid>
                             {/* {element !== undefined && (
                                 <Grid sx={{ mt: 4, width: "100%" }} item>
