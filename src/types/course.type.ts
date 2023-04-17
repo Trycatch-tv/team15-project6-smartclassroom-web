@@ -19,7 +19,8 @@ interface IStudentData {
   studentId?: any | null,
   name: string
 }
-export interface ICourseProp {
-  id: number
+export interface ICourseProp{
+  id: number,
+  handler: () => void | null
 }
 
