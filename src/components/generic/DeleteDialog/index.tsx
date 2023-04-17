@@ -6,11 +6,12 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { IYesNoProp } from './../../../types/generic.type';
+import { IDeleteProp } from '../../../types/generic.type';
+import DeleteIcon from "@mui/icons-material/Delete";
 
 type State = { open: boolean };
-export default class YesNoDialog extends Component<IYesNoProp, State> {
-    constructor(props: IYesNoProp) {
+export default class DeleteDialog extends Component<IDeleteProp, State> {
+    constructor(props: IDeleteProp) {
       super(props);
       this.onYes = this.onYes.bind(this);
       this.onNo = this.onNo.bind(this);
@@ -25,22 +26,16 @@ export default class YesNoDialog extends Component<IYesNoProp, State> {
     render() {
         return (
           <>
-            <Dialog
-                open={this.props.open}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
-            >
-                <DialogTitle id="alert-dialog-title">
-                {this.props.title}
-                </DialogTitle>
+            <Dialog open={this.props.open} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
+                <DialogTitle id="alert-dialog-title">{this.props.title}</DialogTitle>
                 <DialogContent>
-                <DialogContentText id="alert-dialog-description">
-                {this.props.description}
-                </DialogContentText>
+                  <DialogContentText id="alert-dialog-description">
+                    {this.props.description} <b>{this.props.elementName}</b>?
+                  </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                <Button variant="contained" color='primary' onClick={this.onNo}>No</Button>
-                <Button variant="contained" color='secondary' onClick={this.onYes} autoFocus>Si</Button>
+                  <Button variant="contained" color='error'   onClick={this.onYes} autoFocus>Eliminar</Button>
+                  <Button variant="contained" color='primary' onClick={this.onNo}>Cancelar</Button>
                 </DialogActions>
             </Dialog>
           </>

@@ -19,7 +19,7 @@ import ViewIcon from '@mui/icons-material/Visibility';
 import { Helmet } from 'react-helmet-async';
 import Edit from './edit';
 import View from './view';
-import YesNoDialog from './../generic/YesNoDialog';
+import DeleteDialog from '../generic/DeleteDialog';
 //https://mui.com/material-ui/react-table/
 //https://www.bezkoder.com/react-typescript-axios/
 type Props = {};
@@ -30,6 +30,7 @@ type State = {
   currentIdToEdit: number;
   currentIdToDelete: number;
   searchValue: string;
+  currentCourseName: string;
 };
 
 export default class List extends Component<Props, State> {
@@ -48,6 +49,7 @@ export default class List extends Component<Props, State> {
       currentIdToEdit: 0,
       currentIdToDelete: 0,
       searchValue: "",
+      currentCourseName: "",
     };
   }
 
@@ -99,11 +101,12 @@ export default class List extends Component<Props, State> {
     });
   }
 
-  setActiveCourseToDelete(id: number) {
+  setActiveCourseToDelete(id: number, name: string) {
     this.setState({
       currentIdToView: 0,
       currentIdToEdit: 0,
-      currentIdToDelete: id
+      currentIdToDelete: id,
+      currentCourseName: name
     });
   }
 
@@ -142,7 +145,7 @@ export default class List extends Component<Props, State> {
   };
 
   render() {
-    const { searchValue, courses, currentIdToEdit, currentIdToView } = this.state;
+    const { searchValue, courses, currentIdToEdit, currentIdToView, currentCourseName } = this.state;
       if(currentIdToEdit>0){
         return (<Edit id={currentIdToEdit} handler={this.refreshList}></Edit>);
       }else if(currentIdToView>0){
@@ -203,13 +206,13 @@ export default class List extends Component<Props, State> {
                         </TableCell>
                         <TableCell align="left">{course.teacher}</TableCell>
                         <TableCell className="noWrap">
-                            <Button variant="contained" color="secondary" className='listButton' onClick={()=>{ this.setActiveCourseToView(course.id); }}>
+                            <Button variant="contained" color="primary" className='listButton' onClick={()=>{ this.setActiveCourseToView(course.id); }}>
                               <ViewIcon />
                             </Button>
                             <Button variant="contained" color="secondary" className='listButton' onClick={()=>{ this.setActiveCourseToEdit(course.id); }}>
                               <EditIcon />
                             </Button>
-                            <Button variant="contained" color="error" className='listButton' onClick={()=>{ this.setActiveCourseToDelete(course.id); }}>
+                            <Button variant="contained" color="error" className='listButton' onClick={()=>{ this.setActiveCourseToDelete(course.id, course.name); }}>
                               <DeleteIcon />
                             </Button>
                         </TableCell>
@@ -220,10 +223,12 @@ export default class List extends Component<Props, State> {
               </Paper>
             </Grid>
         </Paper>
-        <YesNoDialog open={this.state.currentIdToDelete>0} description='Esta a punto de borrar' title='Desea borrar este curso?'
+        <DeleteDialog open={this.state.currentIdToDelete>0} 
+          description='¿Estás seguro de que deseas eliminar el curso' title='¿Deseas eliminar este curso?'
+          elementName={this.state.currentCourseName}
           handlerYes={()=>{ this.removeCourse(this.state.currentIdToDelete)}}
           handlerNo={()=>{ this.setState({ currentIdToDelete: 0 }); }}
-        ></YesNoDialog>
+        ></DeleteDialog>
       </>
       );
     }
