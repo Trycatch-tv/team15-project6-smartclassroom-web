@@ -1,16 +1,7 @@
 [
     {
-        "image": "LuisDavidLopezZapata.jpg",
-        "name": "Luis David López Zapata",
-        "email":"luisdavidlz0202@gmail.com",
-        "position": "Team Lead",
-        "description": "",
-        "gitHub": "https://github.com/luisdavid0202",
-        "linkedIn": "https://www.linkedin.com/in/luis-david-lopez-zapata-7377a0153/"
-    },
-    {
         "image": "CarlosNino.jpg",
-        "name": "Carlos Andrés Niño Sosa",
+        "name": "Carlos Niño",
         "email":"sqsandres@gmail.com",
         "position": "Frontend Developer",
         "description": "",
@@ -18,40 +9,22 @@
         "linkedIn": "https://www.linkedin.com/in/sqsandres/"
     },
     {
-        "image": "JoshuaArfaxadAcevedoOrtíz.JPG",
-        "name": "Joshua Arfaxad Acevedo Ortíz",
-        "email":"joshuaacevor@gmail.com",
-        "position": "Backend Developer",
-        "description": "",
-        "gitHub": "https://github.com/joshArfDev",
-        "linkedIn": "https://www.linkedin.com/in/joshuaarfa/"
-    },
-    {
-        "image": "EynarJoelAlvarezMamani.jpg",
-        "name": "Eynar Joel Alvarez Mamani",
-        "email":"eynar.j.alvarez.m@gmail.com",
-        "position": "Frontend Developer",
-        "description": "",
-        "gitHub": "https://github.com/Eynar92",
-        "linkedIn": "https://www.linkedin.com/in/eynaralvarez"
-    },
-    {
-        "image": "LuisDavidRodriguezPacheco.jpg",
-        "name": "Luis David Rodríguez Pacheco",
-        "email":"luisdarodriguez164@gmail.com",
-        "position": "Backend Developer",
-        "description": "",
-        "gitHub": "https://github.com/luisdav1",
-        "linkedIn": "https://www.linkedin.com/in/luis-rodr%C3%ADguez-082402248/"
-    },
-    {
         "image": "default.png",
-        "name": "Dylan Steven Suarez Cruz",
+        "name": "Dylan Suarez",
         "email":"2000sajo@gmail.com",
         "position": "Full-Stack Developer",
         "description": "",
         "gitHub": "https://github.com/DyEsSuCr",
         "linkedIn": "https://www.linkedin.com/in/dyessucr/"
+    },
+    {
+        "image": "EynarJoelAlvarezMamani.jpg",
+        "name": "Eynar Alvarez",
+        "email":"eynar.j.alvarez.m@gmail.com",
+        "position": "Frontend Developer",
+        "description": "",
+        "gitHub": "https://github.com/Eynar92",
+        "linkedIn": "https://www.linkedin.com/in/eynaralvarez"
     },
     {
         "image": "default.png",
@@ -63,12 +36,39 @@
         "linkedIn": ""
     },
     {
-        "image": "default.png",
+        "image": "JoshuaArfaxadAcevedoOrtíz.JPG",
+        "name": "Joshua Acevedo",
+        "email":"joshuaacevor@gmail.com",
+        "position": "Backend Developer",
+        "description": "",
+        "gitHub": "https://github.com/joshArfDev",
+        "linkedIn": "https://www.linkedin.com/in/joshuaarfa/"
+    },
+    {
+        "image": "LuisDavidLopezZapata.jpg",
+        "name": "Luis López",
+        "email":"luisdavidlz0202@gmail.com",
+        "position": "Team Lead",
+        "description": "",
+        "gitHub": "https://github.com/luisdavid0202",
+        "linkedIn": "https://www.linkedin.com/in/luis-david-lopez-zapata-7377a0153/"
+    },
+    {
+        "image": "LuisDavidRodriguezPacheco.jpg",
+        "name": "Luis Rodríguez",
+        "email":"luisdarodriguez164@gmail.com",
+        "position": "Backend Developer",
+        "description": "",
+        "gitHub": "https://github.com/luisdav1",
+        "linkedIn": "https://www.linkedin.com/in/luis-rodr%C3%ADguez-082402248/"
+    },
+    {
+        "image": "ManuelaGomez.JPEG",
         "name": "Manuela Gómez",
         "email":"manu.gomez.e@gmail.com",
         "position": "Frontend Developer",
         "description": "",
-        "gitHub": "",
-        "linkedIn": ""
+        "gitHub": "https://github.com/manugomz",
+        "linkedIn": "https://www.linkedin.com/in/manuela-g%C3%B3mez-a5547a125/"
     }
 ]
