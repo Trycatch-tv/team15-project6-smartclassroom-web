@@ -32,7 +32,7 @@ function App() {
           > 
             {content}
         </Box>
-        <Footer />
+        {<Footer />}
       </Box>
   </ThemeProvider>
   );
