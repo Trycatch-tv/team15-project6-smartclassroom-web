@@ -19,37 +19,33 @@ export default function LeftMenu() {
   return (
     <Drawer variant="permanent" open={open} className='leftMenu'>
       <List component="nav" className="side-bar">
-        <ListItemButton>
+        
+        <ListItemButton href="/dashboard">
           <ListItemIcon className="icon">
             <DashboardIcon />
           </ListItemIcon>
-          <Link href="/dashboard" underline="none">
-            <ListItemText secondary="Dashboard" />
-          </Link>
+          <ListItemText secondary="Dashboard" />
         </ListItemButton>
-        <ListItemButton>
+
+        <ListItemButton  href="/courses">
           <ListItemIcon className="icon">
             <LocalLibraryIcon />
           </ListItemIcon>
-          <Link href="/courses" underline="none">
-            <ListItemText secondary="Cursos" />
-          </Link>
+          <ListItemText secondary="Cursos" />
         </ListItemButton>
-        <ListItemButton>
+
+        <ListItemButton href="/students">
           <ListItemIcon className="icon">
             <PeopleIcon />
           </ListItemIcon>
-          <Link href="/students" underline="none">
-            <ListItemText secondary="Estudiantes" />
-          </Link>
+          <ListItemText secondary="Estudiantes" />
         </ListItemButton>
-        <ListItemButton>
+
+        <ListItemButton href="/about-us">
           <ListItemIcon className="icon">
             <InfoIcon />
           </ListItemIcon>
-          <Link href="/about-us" underline="none">
-            <ListItemText secondary="Sobre nosotros" />
-          </Link>
+          <ListItemText secondary="Sobre nosotros" />
         </ListItemButton>
       </List>
     </Drawer>
