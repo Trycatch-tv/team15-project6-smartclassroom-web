@@ -1,84 +1,46 @@
-# Smart Class Room
+# Smart Classroom WEB
+[![Build Status](https://dev.azure.com/LuisLopezOrg/SmartClassroom/_apis/build/status%2FBuild%20SmartClassroom%20WEB%20-%20DEV?branchName=develop)](https://dev.azure.com/LuisLopezOrg/SmartClassroom/_build/latest?definitionId=4&branchName=develop)
 
+This repository contains the source code for the Smart Classroom web application, built with TypeScript, React, HTML, and CSS.
 
-## WEB Site:
+## 📋 Prerequisites
+Before running the code, the following prerequisites must be met:
 
-Website to learn a little about everything, particularly this project is a class and student management application, built with React, Redux, TypeScript/JavaScript, and CSS.
+- Node.Js must be installed (version 18 or higher)
+- A modern web browser (Chrome, Firefox, Safari, Edge, etc.)
 
-## Project Status
-This project is currently in development. Users can create classes, students and create relations without any restriction.
+## 🚀 Installation
+1. Clone the repository on your local machine.
+```sh
+git clone https://github.com/Trycatch-tv/team15-project6-smartclassroom-web.git
+```
 
+2. Navigate to the repository folder.
+```sh
+cd team15-project6-smartclassroom-web
+```
 
-## Project Screen Shot(s)
- **In progress**
+3. Install the dependencies.
+```sh
+npm install
+```
 
+4. Run the server.
+```sh
+npm start
+```
 
-## Installation and Setup Instructions
-NOTE: we are using vscode
+The server will run on http://localhost:3000.
 
-### Clone down this repository. 
+## 📖 Usage
+All the documentation related to the Smart Classroom project is described [here](https://docs.google.com/document/d/1w90BNus2SGBJtNl7b1vn-wyo6W5a8GFgv5v3kku4Qeg/edit?usp=sharing).
 
-`git clone https://github.com/Trycatch-tv/team15-project6-smartclassroom-web.git`
+## 🎉 Demo
+To see a live demo of the Smart Classroom application, please visit the following URL:
+https://dev-smartclassroom-web.azurewebsites.net
 
-More information here:
-https://github.com/Trycatch-tv/team15-project6-smartclassroom-web
+## 🤝 Contributions
+If you wish to contribute to the development of Smart Classroom, please submit a pull request with your proposed changes. Make sure your changes are compatible with the MIT license.
 
-
-### Installation:
-You will need `node` and `npm` installed globally on your machine.  
-
-`npm install`  
-
-### In the project directory, you can run:
-
-`npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-`npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-`npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-`npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-### Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-#### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-#### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-## Configuration
-
-
-# License
-MIT license
+## 📝 License
+This project is licensed under the MIT License. See the LICENSE file for more information.
