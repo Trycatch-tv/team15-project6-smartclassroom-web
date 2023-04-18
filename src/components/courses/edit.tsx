@@ -4,7 +4,6 @@ import { Component, ChangeEvent } from "react";
 import { ICourseData, ICourseProp } from './../../types/course.type';
 import moment from 'moment';
 import CourseDataService from "../../services/courses.services";
-import { Navigate } from 'react-router-dom';
 
 type State = {
   course_id: number,
@@ -12,8 +11,7 @@ type State = {
   course_description: string,
   start_date: Date,
   end_date: Date,
-  teacher: string,
-  redirect: boolean;
+  teacher: string
 };
 export default class Edit extends Component<ICourseProp, State> {
   constructor(props: ICourseProp) {
@@ -26,34 +24,50 @@ export default class Edit extends Component<ICourseProp, State> {
     this.onChangeStartDate = this.onChangeStartDate.bind(this);
     this.onChangeEndDate = this.onChangeEndDate.bind(this);
     this.onChangeTeacher = this.onChangeTeacher.bind(this);
+    this.onOpen = this.onOpen.bind(this);
+
     this.state = {
       course_id: this.props.id,
       course_description:'',
       end_date:moment(new Date()).add(3, 'months').toDate(),
       start_date:moment(new Date()).subtract(1, 'months').toDate(),
       course_name:'',
-      teacher:'',
-      redirect:false
+      teacher:''
     };
+    this.onOpen();
   }
 
-  onSave = () => {
-      const currentElement : ICourseData ={
-        course_description:this.state.course_description,
-        end_date:this.state.end_date,
-        start_date:this.state.start_date,
-        course_name:this.state.course_name,
-        teacher:this.state.teacher,
-      };
-      CourseDataService.create(currentElement).then((response: any) => {
-        this.setState({ redirect: true });
+  onOpen = () =>{
+    CourseDataService.get(this.props.id.toString()).then((response: any) => {
+      //courses: response.data;
+      this.setState( {
+        //course_id: response.data.id,
+        course_description:response.data.course_description,
+        end_date:moment(response.data.end_date).toDate(),
+        start_date:moment(response.data.start_date).toDate(),
+        course_name:response.data.course_name,
+        teacher:response.data.teacher
+      });
     }).catch((e: Error) => {
       console.error(e);
     });
   }
-
+  onSave = () => {
+    const currentElement : ICourseData ={
+      course_description:this.state.course_description,
+      end_date:this.state.end_date,
+      start_date:this.state.start_date,
+      course_name:this.state.course_name,
+      teacher:this.state.teacher,
+    };
+    CourseDataService.update(currentElement, this.state.course_id).then((response: any) => {
+        this.props.handler();
+    }).catch((e: Error) => {
+      console.error(e);
+    });
+  }
   onCancel = () => {
-    this.setState({ redirect: true });
+    this.props.handler();
   }
   onChangeName(e: ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;
@@ -78,10 +92,7 @@ export default class Edit extends Component<ICourseProp, State> {
   }
   
   render() {
-    const {course_name,course_description,start_date,end_date,teacher,redirect} = this.state;
-    if (redirect) {
-      return <Navigate to='/courses'/>;
-    }
+    const {course_name,course_description,start_date,end_date,teacher} = this.state;
     return (
       <>
         <Typography
@@ -90,7 +101,7 @@ export default class Edit extends Component<ICourseProp, State> {
             color="inherit"
             noWrap
             sx={{ flexGrow: 1, paddingLeft: '25px', paddingTop: '15px' }}
-            > Editar curso {this.state.course_id}
+            > Editar Curso
         </Typography>
         <Divider /><br /><br/>
         <form onSubmit={()=>{return false;}}>
@@ -132,7 +143,7 @@ export default class Edit extends Component<ICourseProp, State> {
               onChange={this.onChangeTeacher}
               value={teacher} fullWidth required sx={{mb: 4}}
           />
-          <Button variant="contained" color="secondary" type="button" onClick={this.onSave}>Crear</Button>
+          <Button variant="contained" color="secondary" type="button" onClick={this.onSave}>Actualizar</Button>
           <Button variant="contained" color="error" type="button" onClick={this.onCancel}>Cancelar</Button>
         </form>
       </>
