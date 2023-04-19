@@ -65,7 +65,7 @@ export default class List extends Component<Props, State> {
   }
 
   retrieveCourses() {
-    CourseDataService.getAll()
+    CourseDataService.getAll(this.state.searchValue)
       .then((response: any) => {
         this.setState({
           courses: response.data,
@@ -127,7 +127,7 @@ export default class List extends Component<Props, State> {
       currentIdToDelete: 0
     });
 
-    CourseDataService.findByTitle(this.state.searchValue)
+    CourseDataService.getAll(this.state.searchValue)
       .then((response: any) => {
         this.setState({
           courses: response.data,
@@ -163,7 +163,7 @@ export default class List extends Component<Props, State> {
                 variant="h6"
                 color="inherit"
                 noWrap
-                sx={{ flexGrow: 1, paddingLeft: '25px', paddingTop: '15px' }}
+                sx={{ flexGrow: 1, paddingLeft: '0px', paddingTop: '15px' }}
                 > Cursos
             </Typography>
             <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
@@ -206,12 +206,16 @@ export default class List extends Component<Props, State> {
                         </TableCell>
                         <TableCell align="left">{course.teacher}</TableCell>
                         <TableCell className="noWrap">
-                            <Button variant="contained" color="primary" className='listButton' onClick={()=>{ this.setActiveCourseToView(course.id); }}>
-                              <ViewIcon />
-                            </Button>
-                            <Button variant="contained" color="secondary" className='listButton' onClick={()=>{ this.setActiveCourseToEdit(course.id); }}>
-                              <EditIcon />
-                            </Button>
+                            <Link to={`/courses/${course.id}`}>
+                              <Button variant="contained" color="primary" className='listButton'>
+                                <ViewIcon />
+                              </Button>
+                            </Link>
+                            <Link to={`/courses/edit/${course.id}`}>
+                              <Button variant="contained" color="secondary" className='listButton'>
+                                <EditIcon />
+                              </Button>
+                            </Link>
                             <Button variant="contained" color="error" className='listButton' onClick={()=>{ this.setActiveCourseToDelete(course.id, course.name); }}>
                               <DeleteIcon />
                             </Button>
