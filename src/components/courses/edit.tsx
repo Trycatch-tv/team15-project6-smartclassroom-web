@@ -38,7 +38,7 @@ export default class Edit extends Component<ICourseProp, State> {
   }
 
   onOpen = () =>{
-    CourseDataService.get(this.props.id.toString()).then((response: any) => {
+    CourseDataService.get(this.props.id).then((response: any) => {
       //courses: response.data;
       this.setState( {
         //course_id: response.data.id,

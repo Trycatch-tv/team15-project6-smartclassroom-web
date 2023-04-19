@@ -65,7 +65,7 @@ export default class List extends Component<Props, State> {
   }
 
   retrieveCourses() {
-    CourseDataService.getAll()
+    CourseDataService.getAll(this.state.searchValue)
       .then((response: any) => {
         this.setState({
           courses: response.data,
@@ -127,7 +127,7 @@ export default class List extends Component<Props, State> {
       currentIdToDelete: 0
     });
 
-    CourseDataService.findByTitle(this.state.searchValue)
+    CourseDataService.getAll(this.state.searchValue)
       .then((response: any) => {
         this.setState({
           courses: response.data,
