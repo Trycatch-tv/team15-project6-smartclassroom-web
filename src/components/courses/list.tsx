@@ -65,7 +65,7 @@ export default class List extends Component<Props, State> {
   }
 
   retrieveCourses() {
-    CourseDataService.getAll()
+    CourseDataService.getAll(this.state.searchValue)
       .then((response: any) => {
         this.setState({
           courses: response.data,
@@ -127,7 +127,7 @@ export default class List extends Component<Props, State> {
       currentIdToDelete: 0
     });
 
-    CourseDataService.findByTitle(this.state.searchValue)
+    CourseDataService.getAll(this.state.searchValue)
       .then((response: any) => {
         this.setState({
           courses: response.data,
@@ -163,7 +163,7 @@ export default class List extends Component<Props, State> {
                 variant="h6"
                 color="inherit"
                 noWrap
-                sx={{ flexGrow: 1, paddingLeft: '25px', paddingTop: '15px' }}
+                sx={{ flexGrow: 1, paddingLeft: '0px', paddingTop: '15px' }}
                 > Cursos
             </Typography>
             <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>

@@ -35,7 +35,7 @@ const Edit = (props: ICourseProp & Props) => {
   useEffect(() => {
     const onOpen = async () => {
       try {
-        const response = await CourseDataService.get(state.course_id.toString());
+        const response = await CourseDataService.get(state.course_id);
         const data = response.data;
         setState({
           course_id: data.course_id,
@@ -107,7 +107,7 @@ const Edit = (props: ICourseProp & Props) => {
             variant="h6"
             color="inherit"
             noWrap
-            sx={{ flexGrow: 1, paddingLeft: '25px', paddingTop: '15px' }}
+            sx={{ flexGrow: 1, paddingLeft: '0px', paddingTop: '15px' }}
             > Editar Curso
         </Typography>
         <Divider /><br /><br/>

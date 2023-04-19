@@ -89,7 +89,7 @@ export default class Create extends Component<Props, State> {
             variant="h6"
             color="inherit"
             noWrap
-            sx={{ flexGrow: 1, paddingLeft: '25px', paddingTop: '15px' }}
+            sx={{ flexGrow: 1, paddingLeft: '0px', paddingTop: '15px' }}
             > Crear nuevo curso
         </Typography>
         <Divider /><br /><br/>
