@@ -206,12 +206,16 @@ export default class List extends Component<Props, State> {
                         </TableCell>
                         <TableCell align="left">{course.teacher}</TableCell>
                         <TableCell className="noWrap">
-                            <Button variant="contained" color="primary" className='listButton' onClick={()=>{ this.setActiveCourseToView(course.id); }}>
-                              <ViewIcon />
-                            </Button>
-                            <Button variant="contained" color="secondary" className='listButton' onClick={()=>{ this.setActiveCourseToEdit(course.id); }}>
-                              <EditIcon />
-                            </Button>
+                            <Link to={`/courses/${course.id}`}>
+                              <Button variant="contained" color="primary" className='listButton'>
+                                <ViewIcon />
+                              </Button>
+                            </Link>
+                            <Link to={`/courses/edit/${course.id}`}>
+                              <Button variant="contained" color="secondary" className='listButton'>
+                                <EditIcon />
+                              </Button>
+                            </Link>
                             <Button variant="contained" color="error" className='listButton' onClick={()=>{ this.setActiveCourseToDelete(course.id, course.name); }}>
                               <DeleteIcon />
                             </Button>
