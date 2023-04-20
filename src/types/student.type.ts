@@ -1,6 +1,6 @@
 export interface IStudentData {
   id?: any | null,
-  name: string,
+  studentName: string,
   email: string,
   phone: string
 }

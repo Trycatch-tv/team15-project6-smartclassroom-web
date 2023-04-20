@@ -8,7 +8,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 type State = {
   id: number,
-  name: string,
+  studentName: string,
   email: string,
   phone: string
   // course_id: number,
@@ -28,7 +28,7 @@ const Edit = (props: IStudentProp & Props) => {
   const navigate = useNavigate();
   const [state, setState] = useState<State>({
     id: Number(id),
-    name: '',
+    studentName: '',
     email: '',
     phone: '',
   });
@@ -40,7 +40,7 @@ const Edit = (props: IStudentProp & Props) => {
         const data = response.data;
         setState({
           id: data.id,
-          name: data.name,
+          studentName: data.studentName,
           email: data.email,
           phone: data.phone,
         });
@@ -53,7 +53,7 @@ const Edit = (props: IStudentProp & Props) => {
 
   const onSave = async () => {
     const currentElement: IStudentData = {
-      name: state.name,
+      studentName: state.studentName,
       email: state.email,
       phone: state.phone,
       // course_name: state.course_name,
@@ -73,7 +73,7 @@ const Edit = (props: IStudentProp & Props) => {
 
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    setState((prevState) => ({ ...prevState, name: value }));
+    setState((prevState) => ({ ...prevState, studentName: value }));
   };
 
   const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -98,7 +98,7 @@ const Edit = (props: IStudentProp & Props) => {
   };*/
 
   //render() {
-  const { name, email, phone} = state;
+  const { studentName, email, phone} = state;
   return (
     <>
       <Typography
@@ -112,7 +112,7 @@ const Edit = (props: IStudentProp & Props) => {
       <Divider /><br /><br />
       <form onSubmit={() => { return false; }}>
         <TextField
-          type="text" variant='outlined' value={name}
+          type="text" variant='outlined' value={studentName}
           color='secondary' label="Nombre"
           onChange={onChangeName}
           fullWidth required sx={{ mb: 4 }}

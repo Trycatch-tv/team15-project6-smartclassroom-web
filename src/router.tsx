@@ -73,7 +73,7 @@ const routes: RouteObject[] = [
     element: <StudentsCreate />,
   },
   {
-    path: "/students/edit",
+    path: "/students/edit/:id",
     element: <StudentsEdit />,
   },
   {

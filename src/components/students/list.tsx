@@ -20,7 +20,6 @@ import "./list.css";
 import EditIcon from "@mui/icons-material/EditNote";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Helmet } from 'react-helmet-async';
-import { log } from 'console';
 import DeleteDialog from '../generic/DeleteDialog';
 import Edit from './edit';
 import View from '../courses/view';
@@ -179,7 +178,7 @@ export default class List extends Component<Props, State> {
               variant="h6"
               color="inherit"
               noWrap
-              sx={{ flexGrow: 1, paddingLeft: '25px', paddingTop: '15px' }}
+              sx={{ flexGrow: 1, paddingLeft: '30px', paddingTop: '15px' }}
             > Estudiantes
             </Typography>
             <Grid item xs={12}>
@@ -199,7 +198,7 @@ export default class List extends Component<Props, State> {
                     {students.map((student: IStudentData, index: number) => (
                       <TableRow key={student.id}>
                         <TableCell component="th" scope="row">
-                          {student.name}
+                          {student.studentName}
                         </TableCell>
                         <TableCell align="left">{student.email}</TableCell>
                         <TableCell align="left">{student.phone}</TableCell>
@@ -209,7 +208,7 @@ export default class List extends Component<Props, State> {
                               <EditIcon />
                             </Button>
                           </Link>
-                          <Button variant="contained" color="error" className='listButton' onClick={() => { this.setActiveStudentToDelete(student.id, student.name); }}>
+                          <Button variant="contained" color="error" className='listButton' onClick={() => { this.setActiveStudentToDelete(student.id, student.studentName); }}>
                             <DeleteIcon />
                           </Button>
                         </TableCell>
