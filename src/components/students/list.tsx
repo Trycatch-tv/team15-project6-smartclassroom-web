@@ -1,15 +1,18 @@
 import * as React from 'react';
-import { Component, ChangeEvent } from "react";
+import { Component, ChangeEvent, useState } from "react";
 import StudentsDataService from "../../services/students.services";
-import { ICourseData } from "../../types/course.type";
 import { IStudentData } from "../../types/student.type";
+import { Link } from "react-router-dom";
 import {
   Grid, Box,
   Table,
   TableBody,
   TableCell,
   TableHead,
-  TableRow, ButtonGroup, Button, Typography
+  TableRow,
+  ButtonGroup,
+  Button,
+  Typography,
 } from "@mui/material";
 import Paper from '@mui/material/Paper';
 import moment from "moment";
@@ -17,6 +20,10 @@ import "./list.css";
 import EditIcon from "@mui/icons-material/EditNote";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Helmet } from 'react-helmet-async';
+import { log } from 'console';
+import DeleteDialog from '../generic/DeleteDialog';
+import Edit from './edit';
+import View from '../courses/view';
 //https://mui.com/material-ui/react-table/
 type Props = {};
 
@@ -25,6 +32,10 @@ type State = {
   currentTutorial: IStudentData | null;
   currentIndex: number;
   searchTitle: string;
+  currentIdToView: number;
+  currentIdToEdit: number;
+  currentIdToDelete: number;
+  currentStudentName: string;
 };
 
 export default class List extends Component<Props, State> {
@@ -33,8 +44,10 @@ export default class List extends Component<Props, State> {
     this.onChangeSearchTitle = this.onChangeSearchTitle.bind(this);
     this.retrieveStudents = this.retrieveStudents.bind(this);
     this.refreshList = this.refreshList.bind(this);
+    this.setActiveStudentToEdit = this.setActiveStudentToEdit.bind(this);
+    this.setActiveStudentToView = this.setActiveStudentToView.bind(this);
     this.setActiveTutorial = this.setActiveTutorial.bind(this);
-    this.removeCourse = this.removeCourse.bind(this);
+    this.removeStudent = this.removeStudent.bind(this);
     //this.searchTitle = this.searchTitle.bind(this);
 
     this.state = {
@@ -42,8 +55,14 @@ export default class List extends Component<Props, State> {
       currentTutorial: null,
       currentIndex: -1,
       searchTitle: "",
+      currentIdToView: 0,
+      currentIdToEdit: 0,
+      currentIdToDelete: 0,
+      currentStudentName: "",
     };
   }
+
+
 
   componentDidMount() {
     this.retrieveStudents();
@@ -78,6 +97,22 @@ export default class List extends Component<Props, State> {
     });
   }
 
+  setActiveStudentToEdit(id: number) {
+    this.setState({
+      currentIdToView: 0,
+      currentIdToEdit: id,
+      currentIdToDelete: 0
+    })
+  }
+
+  setActiveStudentToView(id: number) {
+    this.setState({
+      currentIdToView: id,
+      currentIdToEdit: 0,
+      currentIdToDelete: 0
+    });
+  }
+
   setActiveTutorial(tutorial: IStudentData, index: number) {
     this.setState({
       currentTutorial: tutorial,
@@ -85,7 +120,7 @@ export default class List extends Component<Props, State> {
     });
   }
 
-  removeCourse(id: number) {
+  removeStudent(id: number) {
     StudentsDataService.delete(id)
       .then((response: any) => {
         this.refreshList();
@@ -93,6 +128,15 @@ export default class List extends Component<Props, State> {
       .catch((e: Error) => {
         console.log(e);
       });
+  }
+
+  setActiveStudentToDelete(id: number, name: string) {
+    this.setState({
+      currentIdToView: 0,
+      currentIdToEdit: 0,
+      currentIdToDelete: id,
+      //currentStudentName: name,
+    });
   }
   /*
 
@@ -114,63 +158,76 @@ export default class List extends Component<Props, State> {
       });
   }
   */
+
   render() {
-    const { searchTitle, students, currentTutorial, currentIndex } = this.state;
-    return (
-      <>
-        <Helmet>
-          <title>Dashboard</title>
-        </Helmet>
-        <Paper elevation={1} >
-          <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
-            noWrap
-            sx={{ flexGrow: 1, paddingLeft: '25px', paddingTop: '15px' }}
-          > Estudiantes
-          </Typography>
-          <Grid item xs={12}>
-            <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-              <Table size="small">
-                <TableHead>
-                  <TableRow>
-                    <TableCell align="left">Nombre</TableCell>
-                    <TableCell align="left">Correo electrónico</TableCell>
-                    {/* <TableCell align="left" className="noWrap">Fecha de inicio</TableCell>
+    const { students, currentIdToView, currentIdToEdit } = this.state;
+
+    if (currentIdToEdit > 0) {
+      return (<Edit id={currentIdToEdit} handler={this.refreshList}></Edit>);
+    } else if (currentIdToView > 0) {
+      return (<View id={currentIdToView} handler={this.refreshList}></View>);
+    } else {
+
+      return (
+        <>
+          <Helmet>
+            <title>Dashboard</title>
+          </Helmet>
+          <Paper elevation={1} >
+            <Typography
+              component="h1"
+              variant="h6"
+              color="inherit"
+              noWrap
+              sx={{ flexGrow: 1, paddingLeft: '25px', paddingTop: '15px' }}
+            > Estudiantes
+            </Typography>
+            <Grid item xs={12}>
+              <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
+                <Table size="small">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell align="left">Nombre</TableCell>
+                      <TableCell align="left">Correo electrónico</TableCell>
+                      {/* <TableCell align="left" className="noWrap">Fecha de inicio</TableCell>
                     <TableCell align="left" className="noWrap">Fecha de finalización</TableCell> */}
-                    <TableCell align="left">Número de teléfono</TableCell>
-                    <TableCell></TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {students.map((student: IStudentData, index: number) => (
-                    <TableRow key={student.id}>
-                      <TableCell component="th" scope="row">
-                        {student.name}
-                      </TableCell>
-                      <TableCell align="left">{student.email}</TableCell>
-                      {/* <TableCell align="left">
-                        {moment(student.startDate).format("YYYY-MM-DD")}
-                      </TableCell>
-                      <TableCell align="left">
-                        {moment(student.endDate).format("YYYY-MM-DD")}
-                      </TableCell> */}
-                      <TableCell align="left">{student.phone}</TableCell>
-                      <TableCell className="noWrap">
-                        <Button variant="contained" color="secondary" className='listButton'><EditIcon /></Button>
-                        <Button variant="contained" color="error" className='listButton' onClick={() => {
-                          this.removeCourse(student.id);
-                        }}><DeleteIcon /></Button>
-                      </TableCell>
+                      <TableCell align="left">Número de teléfono</TableCell>
+                      <TableCell></TableCell>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </Paper>
-          </Grid>
-        </Paper>
-      </>
-    );
+                  </TableHead>
+                  <TableBody>
+                    {students.map((student: IStudentData, index: number) => (
+                      <TableRow key={student.id}>
+                        <TableCell component="th" scope="row">
+                          {student.name}
+                        </TableCell>
+                        <TableCell align="left">{student.email}</TableCell>
+                        <TableCell align="left">{student.phone}</TableCell>
+                        <TableCell className="noWrap">
+                          <Link to={`/students/edit/${student.id}`}>
+                            <Button variant="contained" color="secondary" className='listButton'>
+                              <EditIcon />
+                            </Button>
+                          </Link>
+                          <Button variant="contained" color="error" className='listButton' onClick={() => { this.setActiveStudentToDelete(student.id, student.name); }}>
+                            <DeleteIcon />
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </Paper>
+              <DeleteDialog open={this.state.currentIdToDelete > 0}
+                description='¿Estás seguro de que deseas eliminar el curso' title='¿Deseas eliminar este curso?'
+                elementName={this.state.currentStudentName}
+                handlerYes={() => { this.removeStudent(this.state.currentIdToDelete) }}
+                handlerNo={() => { this.setState({ currentIdToDelete: 0 }); }}
+              ></DeleteDialog>
+            </Grid>
+          </Paper>
+        </>
+      );
+    }
   }
 }
