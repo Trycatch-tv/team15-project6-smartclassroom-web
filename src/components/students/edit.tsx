@@ -107,7 +107,7 @@ const Edit = (props: IStudentProp & Props) => {
         color="inherit"
         noWrap
         sx={{ flexGrow: 1, paddingLeft: '0px', paddingTop: '15px' }}
-      > Editar Curso
+      > Editar Estudiante
       </Typography>
       <Divider /><br /><br />
       <form onSubmit={() => { return false; }}>

@@ -13,11 +13,16 @@ import {
   ButtonGroup,
   Button,
   Typography,
+  Fab,
+  AppBar,
+  Toolbar,
 } from "@mui/material";
 import Paper from '@mui/material/Paper';
 import moment from "moment";
 import "./list.css";
-import EditIcon from "@mui/icons-material/EditNote";
+import AddIcon from '@mui/icons-material/Add';
+import ViewIcon from "@mui/icons-material/Visibility";
+import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Helmet } from 'react-helmet-async';
 import DeleteDialog from '../generic/DeleteDialog';
@@ -91,8 +96,9 @@ export default class List extends Component<Props, State> {
   refreshList() {
     this.retrieveStudents();
     this.setState({
-      currentTutorial: null,
-      currentIndex: -1,
+      currentIdToView: 0,
+      currentIdToEdit: 0,
+      currentIdToDelete: 0
     });
   }
 
@@ -172,15 +178,25 @@ export default class List extends Component<Props, State> {
           <Helmet>
             <title>Dashboard</title>
           </Helmet>
+          <AppBar position='static'>
+            <Toolbar>
+              <Typography
+                component="h1"
+                variant="h6"
+                color="inherit"
+                noWrap
+                sx={{ flexGrow: 1, paddingLeft: '0px', paddingTop: '15px' }}
+              > Estudiantes
+              </Typography>
+              <Box>
+
+              </Box>
+              <Fab size='small' color="secondary" aria-label="add" href="/students/create">
+                <AddIcon />
+              </Fab>
+            </Toolbar>
+          </AppBar>
           <Paper elevation={1} >
-            <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              noWrap
-              sx={{ flexGrow: 1, paddingLeft: '30px', paddingTop: '15px' }}
-            > Estudiantes
-            </Typography>
             <Grid item xs={12}>
               <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
                 <Table size="small">
@@ -203,6 +219,11 @@ export default class List extends Component<Props, State> {
                         <TableCell align="left">{student.email}</TableCell>
                         <TableCell align="left">{student.phone}</TableCell>
                         <TableCell className="noWrap">
+                          <Link to={`/students/${student.id}`}>
+                            <Button variant="contained" color="primary" className='listButton'>
+                              <ViewIcon />
+                            </Button>
+                          </Link>
                           <Link to={`/students/edit/${student.id}`}>
                             <Button variant="contained" color="secondary" className='listButton'>
                               <EditIcon />
@@ -224,7 +245,7 @@ export default class List extends Component<Props, State> {
                 handlerNo={() => { this.setState({ currentIdToDelete: 0 }); }}
               ></DeleteDialog>
             </Grid>
-          </Paper>
+          </Paper >
         </>
       );
     }
