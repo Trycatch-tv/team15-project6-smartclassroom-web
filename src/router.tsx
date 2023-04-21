@@ -18,6 +18,7 @@ const CoursesCreate = Loader(lazy(() => import("./components/courses/create")));
 const CoursesView = Loader(lazy(() => import("./components/courses/view")));
 
 const StudentsList = Loader(lazy(() => import("./components/students/list")));
+const StudentsView = Loader(lazy(() => import("./components/students/view")));
 const StudentsEdit = Loader(lazy(() => import("./components/students/edit")));
 const StudentsCreate = Loader( lazy(() => import("./components/students/create")));
 const StudentsUserEdit = Loader( lazy(() => import("./components/students/useredit")));
@@ -63,6 +64,10 @@ const routes: RouteObject[] = [
   {
     path: "/students",
     element: <StudentsList />,
+  },
+  {
+    path: "/students/:id",
+    element: <StudentsView />,
   },
   {
     path: "/students/list",

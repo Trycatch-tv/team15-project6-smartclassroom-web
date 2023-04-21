@@ -3,9 +3,9 @@ import { Component, ChangeEvent } from "react";
 import CourseDataService from "../../services/courses.services";
 import { ICourseDataListElement } from "../../types/course.type";
 import {
-  Grid,TextField,Fab,AppBar,Toolbar,
-  Table, TableBody, TableCell, TableHead, TableRow, 
-  Button,Typography,Box
+  Grid, TextField, Fab, AppBar, Toolbar,
+  Table, TableBody, TableCell, TableHead, TableRow,
+  Button, Typography, Box
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import Paper from '@mui/material/Paper';
@@ -138,43 +138,43 @@ export default class List extends Component<Props, State> {
       });
   }
 
-  handleKeywordKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) =>{
-    if( e.key === 'Enter' ){
+  handleKeywordKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
       this.search();
     }
   };
 
   render() {
     const { searchValue, courses, currentIdToEdit, currentIdToView, currentCourseName } = this.state;
-      if(currentIdToEdit>0){
-        return (<Edit id={currentIdToEdit} handler={this.refreshList}></Edit>);
-      }else if(currentIdToView>0){
-        return (<View id={currentIdToView} handler={this.refreshList}></View>);
-      }else{
-        return (
+    if (currentIdToEdit > 0) {
+      return (<Edit id={currentIdToEdit} handler={this.refreshList}></Edit>);
+    } else if (currentIdToView > 0) {
+      return (<View id={currentIdToView} handler={this.refreshList}></View>);
+    } else {
+      return (
         <>
           <Helmet>
-            <title>Dashboard</title>
+            <title>Cursos - Smart Classroom</title>
           </Helmet>
           <AppBar position="static">
             <Toolbar>
-            <Typography
+              <Typography
                 component="h1"
                 variant="h6"
                 color="inherit"
                 noWrap
                 sx={{ flexGrow: 1, paddingLeft: '0px', paddingTop: '15px' }}
-                > Cursos
-            </Typography>
-            <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-              <SearchIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
-              <TextField label="Buscar" variant="standard" 
-                onKeyPress={this.handleKeywordKeyPress}
-                onChange={this.onChangeSearchValue} value={searchValue} />
-            </Box>
-            <Fab color="secondary" aria-label="add" href="/courses/create">
-              <AddIcon />
-            </Fab>
+              > Cursos
+              </Typography>
+              {/* <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+                <SearchIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
+                <TextField label="Buscar" variant="standard"
+                  onKeyPress={this.handleKeywordKeyPress}
+                  onChange={this.onChangeSearchValue} value={searchValue} />
+              </Box> */}
+              <Fab size='small' color="secondary" aria-label="add" href="/courses/create">
+                <AddIcon />
+              </Fab>
             </Toolbar>
           </AppBar>
           <Paper elevation={1} >
@@ -206,19 +206,19 @@ export default class List extends Component<Props, State> {
                         </TableCell>
                         <TableCell align="left">{course.teacher}</TableCell>
                         <TableCell className="noWrap">
-                            <Link to={`/courses/${course.id}`}>
-                              <Button variant="contained" color="primary" className='listButton'>
-                                <ViewIcon />
-                              </Button>
-                            </Link>
-                            <Link to={`/courses/edit/${course.id}`}>
-                              <Button variant="contained" color="secondary" className='listButton'>
-                                <EditIcon />
-                              </Button>
-                            </Link>
-                            <Button variant="contained" color="error" className='listButton' onClick={()=>{ this.setActiveCourseToDelete(course.id, course.name); }}>
-                              <DeleteIcon />
+                          <Link to={`/courses/${course.id}`}>
+                            <Button variant="contained" color="primary" className='listButton'>
+                              <ViewIcon />
                             </Button>
+                          </Link>
+                          <Link to={`/courses/edit/${course.id}`}>
+                            <Button variant="contained" color="secondary" className='listButton'>
+                              <EditIcon />
+                            </Button>
+                          </Link>
+                          <Button variant="contained" color="error" className='listButton' onClick={() => { this.setActiveCourseToDelete(course.id, course.name); }}>
+                            <DeleteIcon />
+                          </Button>
                         </TableCell>
                       </TableRow>
                     ))}
@@ -226,14 +226,14 @@ export default class List extends Component<Props, State> {
                 </Table>
               </Paper>
             </Grid>
-        </Paper>
-        <DeleteDialog open={this.state.currentIdToDelete>0} 
-          description='¿Estás seguro de que deseas eliminar el curso' title='¿Deseas eliminar este curso?'
-          elementName={this.state.currentCourseName}
-          handlerYes={()=>{ this.removeCourse(this.state.currentIdToDelete)}}
-          handlerNo={()=>{ this.setState({ currentIdToDelete: 0 }); }}
-        ></DeleteDialog>
-      </>
+          </Paper>
+          <DeleteDialog open={this.state.currentIdToDelete > 0}
+            description='¿Estás seguro de que deseas eliminar el curso' title='¿Deseas eliminar este curso?'
+            elementName={this.state.currentCourseName}
+            handlerYes={() => { this.removeCourse(this.state.currentIdToDelete) }}
+            handlerNo={() => { this.setState({ currentIdToDelete: 0 }); }}
+          ></DeleteDialog>
+        </>
       );
     }
   }

@@ -1,6 +1,7 @@
 import dataTeam from "./team.json";
 import "./AboutUs.css";
 import Box from '@mui/material/Box';
+import { Helmet } from 'react-helmet-async';
 import { Component } from "react";
 import {
   Card,
@@ -31,7 +32,13 @@ type CardData = {
 export default class AboutUs extends Component {
   render() {
     return (
-      <><HeaderComponent
+      
+      <>
+      <Helmet>
+        <title>Sobre Nosotros - Smart Classroom</title>
+      </Helmet>
+
+      <HeaderComponent
         title="Smart Classroom"
         description="SmartClassroom es una completa aplicación web que ofrece una amplia gama de funcionalidades para gestionar cursos y estudiantes de manera efectiva. A través de esta plataforma, es posible realizar el registro y la edición de cursos con detalles importantes como su nombre, descripción, fechas, profesor y otros atributos relevantes. Asimismo, se puede llevar a cabo el registro y la edición de estudiantes con datos básicos como su nombre, correo electrónico, teléfono y otros detalles de contacto."
       />
