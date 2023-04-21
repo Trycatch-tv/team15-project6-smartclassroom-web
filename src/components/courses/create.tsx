@@ -5,6 +5,7 @@ import { ICourseData } from './../../types/course.type';
 import moment from 'moment';
 import CourseDataService from "../../services/courses.services";
 import { Navigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 type Props = {};
 type State = {
@@ -84,6 +85,9 @@ export default class Create extends Component<Props, State> {
     }
     return (
       <>
+        <Helmet>
+          <title>Cursos - Smart Classroom</title>
+        </Helmet>
         <Typography
           component="h1"
           variant="h6"

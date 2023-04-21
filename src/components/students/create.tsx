@@ -5,6 +5,7 @@ import { ICourseData } from './../../types/course.type';
 import moment from 'moment';
 import CourseDataService from "../../services/courses.services";
 import { Navigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 type Props = {};
 type State = {
@@ -80,17 +81,20 @@ export default class Create extends Component<Props, State> {
   render() {
     const { course_name, course_description, start_date, end_date, teacher, redirect } = this.state;
     if (redirect) {
-      return <Navigate to='/courses' />;
+      return <Navigate to='/students' />;
     }
     return (
       <>
+        <Helmet>
+          <title>Estudiantes - Smart Classroom</title>
+        </Helmet>
         <Typography
           component="h1"
           variant="h6"
           color="inherit"
           noWrap
           sx={{ flexGrow: 1, paddingLeft: '0px', paddingTop: '15px' }}
-        > Crear nuevo curso
+        > Crear nuevo estudiante
         </Typography>
         <Divider /><br /><br />
         <form onSubmit={() => { return false; }}>

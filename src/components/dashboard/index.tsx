@@ -10,7 +10,7 @@ export default function Footer() {
     return (
     <>
       <Helmet>
-        <title>Dashboard</title>
+        <title>Dashboard - Smart Classroom</title>
       </Helmet>
         
       <Container maxWidth="lg">

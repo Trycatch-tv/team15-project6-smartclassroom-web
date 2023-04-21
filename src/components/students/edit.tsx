@@ -61,6 +61,7 @@ const Edit = (props: IStudentProp & Props) => {
     };
     try {
       await StudentsDataService.update(currentElement, state.id);
+      navigate(-1);
       //handler();
     } catch (e: any) {
       console.error(e);

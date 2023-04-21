@@ -140,7 +140,7 @@ export default class List extends Component<Props, State> {
       currentIdToView: 0,
       currentIdToEdit: 0,
       currentIdToDelete: id,
-      //currentStudentName: name,
+      currentStudentName: name,
     });
   }
   /*
@@ -176,7 +176,7 @@ export default class List extends Component<Props, State> {
       return (
         <>
           <Helmet>
-            <title>Dashboard</title>
+            <title>Estudiantes - Smart Classroom</title>
           </Helmet>
           <AppBar position='static'>
             <Toolbar>
@@ -239,7 +239,7 @@ export default class List extends Component<Props, State> {
                 </Table>
               </Paper>
               <DeleteDialog open={this.state.currentIdToDelete > 0}
-                description='¿Estás seguro de que deseas eliminar el curso' title='¿Deseas eliminar este curso?'
+                description='¿Estás seguro de que deseas eliminar el estudiante' title='¿Deseas eliminar este estudiante?'
                 elementName={this.state.currentStudentName}
                 handlerYes={() => { this.removeStudent(this.state.currentIdToDelete) }}
                 handlerNo={() => { this.setState({ currentIdToDelete: 0 }); }}

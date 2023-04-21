@@ -154,7 +154,7 @@ export default class List extends Component<Props, State> {
       return (
         <>
           <Helmet>
-            <title>Dashboard</title>
+            <title>Cursos - Smart Classroom</title>
           </Helmet>
           <AppBar position="static">
             <Toolbar>
@@ -166,12 +166,12 @@ export default class List extends Component<Props, State> {
                 sx={{ flexGrow: 1, paddingLeft: '0px', paddingTop: '15px' }}
               > Cursos
               </Typography>
-              <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+              {/* <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
                 <SearchIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
                 <TextField label="Buscar" variant="standard"
                   onKeyPress={this.handleKeywordKeyPress}
                   onChange={this.onChangeSearchValue} value={searchValue} />
-              </Box>
+              </Box> */}
               <Fab size='small' color="secondary" aria-label="add" href="/courses/create">
                 <AddIcon />
               </Fab>
