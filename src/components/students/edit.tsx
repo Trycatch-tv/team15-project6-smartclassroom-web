@@ -65,6 +65,7 @@ const Edit = (props: IStudentProp & Props) => {
     } catch (e: any) {
       console.error(e);
     }
+    navigate(-1);
   };
 
   const onCancel = () => {
