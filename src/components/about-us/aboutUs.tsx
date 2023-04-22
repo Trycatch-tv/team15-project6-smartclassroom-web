@@ -44,7 +44,7 @@ export default class AboutUs extends Component {
       />
         <Grid container spacing={2} justifyContent="center">
           {dataTeam.map((cardData: CardData, index: number) => (
-            <Grid item xs={2.5}>
+            <Grid key={index} item xs={2.5}>
               <CardComponent
                 key={index}
                 image={cardData.image}
