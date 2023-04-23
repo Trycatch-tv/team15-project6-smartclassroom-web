@@ -41,7 +41,7 @@ export default class Create extends Component<Props, State> {
     }).catch((e: Error) => {
       console.error(e);
     });
-    this.onRedirect();
+    //this.onRedirect();
   }
 
   onCancel = () => {
