@@ -10,6 +10,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { ICourseData, ICourseProp } from './../../types/course.type';
 import { TextField } from '@mui/material';
 import { stat } from "fs";
+import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
 
 type State = {
@@ -120,6 +121,7 @@ const View = (props: ICourseProp & Props) => {
                   <TableCell align="left">Nota 4</TableCell>
                   <TableCell align="left">Nota 5</TableCell>
                   <TableCell align="left">Nota Final</TableCell>
+                  <TableCell></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -146,6 +148,12 @@ const View = (props: ICourseProp & Props) => {
                     </TableCell>
                     <TableCell align='left'>
                       {score.final}
+                    </TableCell>
+                    <TableCell className="noWrap">
+                      <Button variant="contained" color="secondary" className='listButton' >
+                      {/* onClick={() => { this.setActiveGradesToUpdate(score.studentId, score.studentName); }} */}
+                        <EditIcon />
+                      </Button>
                     </TableCell>
                   </TableRow>
                 ))}
