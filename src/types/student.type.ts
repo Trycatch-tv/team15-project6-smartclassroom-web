@@ -2,7 +2,8 @@ export interface IStudentData {
   id?: any | null,
   studentName: string,
   email: string,
-  phone: string
+  phone: string,
+  nationalId: number
 }
 
 export interface IStudentProp {

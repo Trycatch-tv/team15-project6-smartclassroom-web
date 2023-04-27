@@ -10,7 +10,8 @@ type State = {
   id: number,
   studentName: string,
   email: string,
-  phone: string
+  phone: string,
+  nationalId: number
   // course_id: number,
   // course_name: string,
   // course_description: string,
@@ -31,6 +32,7 @@ const Edit = (props: IStudentProp & Props) => {
     studentName: '',
     email: '',
     phone: '',
+    nationalId: 0
   });
 
   useEffect(() => {
@@ -43,6 +45,7 @@ const Edit = (props: IStudentProp & Props) => {
           studentName: data.studentName,
           email: data.email,
           phone: data.phone,
+          nationalId: data.nationalId
         });
       } catch (e: any) {
         console.error(e);
@@ -56,9 +59,11 @@ const Edit = (props: IStudentProp & Props) => {
       studentName: state.studentName,
       email: state.email,
       phone: state.phone,
+      nationalId: state.nationalId
       // course_name: state.course_name,
       // teacher: state.teacher
     };
+
     try {
       await StudentsDataService.update(currentElement, state.id);
       navigate(-1);
@@ -66,7 +71,7 @@ const Edit = (props: IStudentProp & Props) => {
     } catch (e: any) {
       console.error(e);
     }
-    navigate(-1);
+    //navigate(-1);
   };
 
   const onCancel = () => {
@@ -81,6 +86,11 @@ const Edit = (props: IStudentProp & Props) => {
   const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setState((prevState) => ({ ...prevState, email: value }));
+  };
+
+  const onChangeNationalId = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = Number(e.target.value);
+    setState((prevState) => ({ ...prevState, nationalId: value }));
   };
 
   const onChangePhone = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -100,7 +110,7 @@ const Edit = (props: IStudentProp & Props) => {
   };*/
 
   //render() {
-  const { studentName, email, phone} = state;
+  const { studentName, email, phone, nationalId} = state;
   return (
     <>
       <Typography
@@ -120,15 +130,21 @@ const Edit = (props: IStudentProp & Props) => {
           fullWidth required sx={{ mb: 4 }}
         />
         <TextField
+          type="text" variant='outlined' value={nationalId}
+          color='secondary' label="Documento de identidad"
+          onChange={onChangeNationalId}
+          fullWidth required sx={{ mb: 4 }}
+        />
+        <TextField
           type="text" variant='outlined' value={email}
-          color='secondary' label="Descripcion"
+          color='secondary' label="Correo Electrónico"
           onChange={onChangeEmail}
           fullWidth required sx={{ mb: 4 }}
         />
         <Stack spacing={2} direction="row" sx={{ marginBottom: 4 }}>
         <TextField
           type="text" variant='outlined' value={phone}
-          color='secondary' label="Descripcion"
+          color='secondary' label="Teléfono"
           onChange={onChangePhone}
           fullWidth required sx={{ mb: 4 }}
         />

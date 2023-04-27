@@ -13,7 +13,7 @@ type State = {
   studentName: string;
   email: string;
   phone: string;
-
+  nationalId: number;
   scores: Array<IGradeStudentData>;
 };
 
@@ -30,11 +30,11 @@ const View = (props: IStudentProp & Props) => {
     studentName: '',
     email: '',
     phone: '',
-
+    nationalId: 0,
     scores: []
   });
 
-  const { studentName, email, phone, scores } = state;
+  const { studentName, email, phone, nationalId, scores } = state;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,6 +45,7 @@ const View = (props: IStudentProp & Props) => {
           email: response.data.email,
           phone: response.data.phone,
           studentName: response.data.studentName,
+          nationalId: response.data.nationalId
         }));
 
         const score = await GradesDataService.getStudent(state.id);
@@ -77,6 +78,7 @@ const View = (props: IStudentProp & Props) => {
       </Typography>
       <Divider /><br />
       <Typography sx={{ marginBottom: '10px' }} color="inherit" noWrap><b>Correo electrónico:</b> {email}</Typography>
+      <Typography sx={{ marginBottom: '10px' }} color="inherit" noWrap><b>Documento de identidad:</b> {nationalId}</Typography>
       <Typography color="inherit" noWrap><b>Número de télefono:</b> {phone}</Typography>
       <br />
       <AppBar position='static'>
@@ -88,7 +90,7 @@ const View = (props: IStudentProp & Props) => {
             noWrap
             sx={{ flexGrow: 1, paddingLeft: '0px', fontWeight: 'bold' }}
           >
-            Registro de Cursos
+            Cursos
           </Typography>
           <Fab size='small' color="secondary" aria-label="add" href="">
             <AddIcon />
@@ -113,9 +115,9 @@ const View = (props: IStudentProp & Props) => {
               <TableBody>
 
                 {scores.map((score: IGradeStudentData, index: number) => (
-                  < TableRow key={score.student_id} >
+                  < TableRow key={score.courseId} >
                     <TableCell component='th' scope='row'>
-                      {score.student_name}
+                      {score.courseName}
                     </TableCell>
                     <TableCell align='left'>
                       {score.grade1}
@@ -133,7 +135,7 @@ const View = (props: IStudentProp & Props) => {
                       {score.grade5}
                     </TableCell>
                     <TableCell align='left'>
-                      {score.grade1}
+                      {score.final}
                     </TableCell>
                   </TableRow>
                 ))}

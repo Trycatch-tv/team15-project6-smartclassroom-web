@@ -73,9 +73,9 @@ export default class CoursesList extends Component<Props, State> {
                                 </TableHead>
                                 <TableBody>
                                     {scores.map((score: IGradeCourseData, studentId) => (
-                                        < TableRow key={score.course_id} >
+                                        < TableRow key={score.studentId} >
                                             <TableCell component='th' scope='row'>
-                                                {score.course_name}
+                                                {score.studentName}
                                             </TableCell>
                                             <TableCell align='left'>
                                                 {score.grade1}
@@ -93,7 +93,7 @@ export default class CoursesList extends Component<Props, State> {
                                                 {score.grade5}
                                             </TableCell>
                                             <TableCell align='left'>
-                                                {score.grade1}
+                                                {score.final}
                                             </TableCell>
                                         </TableRow>
                                     ))}
