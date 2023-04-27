@@ -81,6 +81,8 @@ const View = (props: IStudentProp & Props) => {
       <Typography sx={{ marginBottom: '10px' }} color="inherit" noWrap><b>Documento de identidad:</b> {nationalId}</Typography>
       <Typography color="inherit" noWrap><b>Número de télefono:</b> {phone}</Typography>
       <br />
+      <Button sx={{ marginBottom: '10px' }} variant="contained" color="error" type="button" onClick={onClose}>Volver</Button>
+      <br />
       <AppBar position='static'>
         <Toolbar>
           <Typography
@@ -144,11 +146,7 @@ const View = (props: IStudentProp & Props) => {
           </Paper>
         </Grid >
       </Paper >
-
-
-
       <br />
-      <Button sx={{ marginTop: '1rem' }} variant="contained" color="error" type="button" onClick={onClose}>Volver</Button>
     </>
   );
 };
