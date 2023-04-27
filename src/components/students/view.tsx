@@ -1,32 +1,20 @@
-import { Component } from "react";
-import { Button, Stack, Grid, Fab, Divider, Typography, Box, List, ListItem, ListItemText, ListSubheader } from '@mui/material';
-import moment from 'moment';
-import CourseDataService from "../../services/courses.services";
+import { Button, Stack, Grid, Fab, Divider, Typography, Box, List, ListItem, ListItemText, ListSubheader, TableCell, TableRow, AppBar, Toolbar, Paper, Table, TableHead, TableBody } from '@mui/material';
 import StudentsDataService from "../../services/students.services";
-import GradesDataService from "../../services/grades.services";
-import { AxiosResponse } from "axios";
-import { IGradeCourseData } from "../../types/grade.type";
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { ICourseData, ICourseProp } from './../../types/course.type';
+import { useParams, useNavigate, useRoutes } from 'react-router-dom';
 import { IStudentProp } from './../../types/student.type';
-import { TextField } from '@mui/material';
-import { stat } from "fs";
+import AddIcon from '@mui/icons-material/Add';
 
-
+import { IGradeStudentData } from '../../types/grade.type';
+import GradesDataService from '../../services/grades.services';
 
 type State = {
   id: number;
   studentName: string;
   email: string;
   phone: string;
-  /*course_id: number;
-  course_description: string;
-  end_date: Date;
-  start_date: Date;
-  course_name: string;
-  teacher: string;
-  students: IGradeCourseData[];*/
+
+  scores: Array<IGradeStudentData>;
 };
 
 type Props = {
@@ -41,17 +29,12 @@ const View = (props: IStudentProp & Props) => {
     id: Number(id),
     studentName: '',
     email: '',
-    phone: ''
-    /*course_id: Number(id),
-    course_description: '',
-    end_date: new Date(),
-    start_date: new Date(),
-    course_name: '',
-    teacher: '',
-    students: [],*/
+    phone: '',
+
+    scores: []
   });
 
-  const { studentName, email, phone } = state;
+  const { studentName, email, phone, scores } = state;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -64,10 +47,10 @@ const View = (props: IStudentProp & Props) => {
           studentName: response.data.studentName,
         }));
 
-        const studentsResponse = await GradesDataService.getCourse(props.id);
+        const score = await GradesDataService.getStudent(state.id);
         setState((prevState) => ({
           ...prevState,
-          students: studentsResponse.data,
+          scores: score.data,
         }));
       } catch (e) {
         console.error(e);
@@ -80,6 +63,8 @@ const View = (props: IStudentProp & Props) => {
     navigate(-1);
   }
 
+  console.log(scores);
+  
   return (
     <>
       <Typography
@@ -91,29 +76,77 @@ const View = (props: IStudentProp & Props) => {
       > {studentName}
       </Typography>
       <Divider /><br />
-      <Typography color="inherit" noWrap><b>Correo electrónico:</b> {email}</Typography>
-      <Divider sx={{ margin: '10px' }} />
+      <Typography sx={{ marginBottom: '10px' }} color="inherit" noWrap><b>Correo electrónico:</b> {email}</Typography>
       <Typography color="inherit" noWrap><b>Número de télefono:</b> {phone}</Typography>
-      {/*<Divider />
-      <Stack spacing={2} direction="row" sx={{ marginBottom: 4 }}>
-        <Typography color="inherit" noWrap><b>Inicio:</b> {moment(start_date).format('YYYY-MM-DD')}</Typography>
-        <Typography color="inherit" noWrap><b>Fin:</b> {moment(end_date).format('YYYY-MM-DD')}</Typography>
-        </Stack>
-      <Divider /><br />
-      <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }} component="nav"
-        aria-labelledby="nested-list-subheader" subheader="Alumnos asignados">
-        {students.map((student: IGradeCourseData, index: number) => (
-          <ListItem>
-            <ListItemText primary="Single-line item">
-              {1}
-            </ListItemText>
-          </ListItem>
-        ))
-        }
-        <ListItemText primary="No se encontraron elementos" sx={{ display: students.length === 0 ? 'none' : '' }} />
-      </List>*/}
       <br />
-      <Button variant="contained" color="error" type="button" onClick={onClose}>Volver</Button>
+      <AppBar position='static'>
+        <Toolbar>
+          <Typography
+            component="h2"
+            variant="h6"
+            color="inherit"
+            noWrap
+            sx={{ flexGrow: 1, paddingLeft: '0px', fontWeight: 'bold' }}
+          >
+            Registro de Cursos
+          </Typography>
+          <Fab size='small' color="secondary" aria-label="add" href="">
+            <AddIcon />
+          </Fab>
+        </Toolbar>
+      </AppBar>
+      <Paper elevation={1}>
+        <Grid item xs={12}>
+          <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+            <Table size="small">
+              <TableHead>
+                <TableRow>
+                  <TableCell align="left">Curso</TableCell>
+                  <TableCell align="left">Nota 1</TableCell>
+                  <TableCell align="left">Nota 2</TableCell>
+                  <TableCell align="left">Nota 3</TableCell>
+                  <TableCell align="left">Nota 4</TableCell>
+                  <TableCell align="left">Nota 5</TableCell>
+                  <TableCell align="left">Nota Final</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+
+                {scores.map((score: IGradeStudentData, index: number) => (
+                  < TableRow key={score.student_id} >
+                    <TableCell component='th' scope='row'>
+                      {score.student_name}
+                    </TableCell>
+                    <TableCell align='left'>
+                      {score.grade1}
+                    </TableCell>
+                    <TableCell align='left'>
+                      {score.grade2}
+                    </TableCell>
+                    <TableCell align='left'>
+                      {score.grade3}
+                    </TableCell>
+                    <TableCell align='left'>
+                      {score.grade4}
+                    </TableCell>
+                    <TableCell align='left'>
+                      {score.grade5}
+                    </TableCell>
+                    <TableCell align='left'>
+                      {score.grade1}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </Paper>
+        </Grid >
+      </Paper >
+
+
+
+      <br />
+      <Button sx={{ marginTop: '1rem' }} variant="contained" color="error" type="button" onClick={onClose}>Volver</Button>
     </>
   );
 };
