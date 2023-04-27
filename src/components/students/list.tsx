@@ -203,6 +203,7 @@ export default class List extends Component<Props, State> {
                   <TableHead>
                     <TableRow>
                       <TableCell align="left">Nombre</TableCell>
+                      <TableCell align="left">Doc. de identidad</TableCell>
                       <TableCell align="left">Correo electrónico</TableCell>
                       {/* <TableCell align="left" className="noWrap">Fecha de inicio</TableCell>
                     <TableCell align="left" className="noWrap">Fecha de finalización</TableCell> */}
@@ -216,6 +217,7 @@ export default class List extends Component<Props, State> {
                         <TableCell component="th" scope="row">
                           {student.studentName}
                         </TableCell>
+                        <TableCell align="left">{student.nationalId}</TableCell>
                         <TableCell align="left">{student.email}</TableCell>
                         <TableCell align="left">{student.phone}</TableCell>
                         <TableCell className="noWrap">

@@ -11,6 +11,7 @@ type State = {
   studentName: string,
   email: string,
   phone: string,
+  nationalId: number,
   redirect: boolean;
 };
 export default class Create extends Component<Props, State> {
@@ -22,11 +23,13 @@ export default class Create extends Component<Props, State> {
     this.onChangeStudentName = this.onChangeStudentName.bind(this);
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePhone = this.onChangePhone.bind(this);
+    this.onChangeNationalId = this.onChangeNationalId.bind(this);
 
     this.state = {
       studentName: '',
       email: '',
       phone: '',
+      nationalId: 0,
       redirect: false
     };
   }
@@ -36,6 +39,7 @@ export default class Create extends Component<Props, State> {
       studentName: this.state.studentName,
       email: this.state.email,
       phone: this.state.phone,
+      nationalId: this.state.nationalId
     };
     StudentsDataService.create(currentElement).then((response: any) => {
       this.setState({ redirect: true });
@@ -52,6 +56,10 @@ export default class Create extends Component<Props, State> {
     const value = e.target.value;
     this.setState({ studentName: value });
   }
+  onChangeNationalId(e: ChangeEvent<HTMLInputElement>) {
+    const value = Number(e.target.value);
+    this.setState({ nationalId: value });
+  }
   onChangeEmail(e: ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;
     this.setState({ email: value });
@@ -65,7 +73,7 @@ export default class Create extends Component<Props, State> {
   }
 
   render() {
-    const { studentName, email, phone, redirect } = this.state;
+    const { studentName, email, phone, nationalId, redirect } = this.state;
     if (redirect) {
       return <Navigate to='/students' />;
     }
@@ -88,6 +96,12 @@ export default class Create extends Component<Props, State> {
             type="text" variant='outlined' value={studentName}
             color='secondary' label="Nombre"
             onChange={this.onChangeStudentName}
+            fullWidth required sx={{ mb: 4 }}
+          />
+          <TextField
+            type="text" variant='outlined' value={nationalId}
+            color='secondary' label="Documento de identidad"
+            onChange={this.onChangeNationalId}
             fullWidth required sx={{ mb: 4 }}
           />
           <TextField
