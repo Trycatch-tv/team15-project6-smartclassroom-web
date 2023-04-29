@@ -23,4 +23,7 @@ export interface ICourseProp{
   id: number,
   handler: () => void | null
 }
+export interface ICourseNotRolled{
+  studentId: number
+}
 

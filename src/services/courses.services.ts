@@ -4,19 +4,23 @@ import { ICourseData } from "../types/course.type"
 import { IDashboardCoursesCountData } from "../types/dashboard.types"
 
 class CourseDataService {
-  create(data: ICourseData) : Promise<AxiosResponse<ICourseData, any>> {
+  create(data: ICourseData): Promise<AxiosResponse<ICourseData, any>> {
     return http.post<ICourseData>("/courses", data);
   }
 
-  getAll(title: string) : Promise<AxiosResponse<Array<ICourseData>, any>> {
+  getAll(title: string): Promise<AxiosResponse<Array<ICourseData>, any>> {
     return http.get<Array<ICourseData>>("/courses");
   }
 
-  getCount() : Promise<AxiosResponse<IDashboardCoursesCountData, any>> {
+  getCount(): Promise<AxiosResponse<IDashboardCoursesCountData, any>> {
     return http.get<IDashboardCoursesCountData>("/courses/getCount");
   }
 
-  get(id: number) : Promise<AxiosResponse<ICourseData, any>> {
+  getCoursesNotEnrolled(id: number): Promise<AxiosResponse<Array<ICourseData>, any>> {
+    return http.get<Array<ICourseData>>('/courses/getCoursesNotEnrolled');
+  }
+
+  get(id: number): Promise<AxiosResponse<ICourseData, any>> {
     return http.get<ICourseData>(`/courses/${id}`);
   }
 

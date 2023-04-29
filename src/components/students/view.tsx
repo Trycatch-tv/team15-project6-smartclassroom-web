@@ -1,4 +1,4 @@
-import { Button, Stack, Grid, Fab, Divider, Typography, Box, List, ListItem, ListItemText, ListSubheader, TableCell, TableRow, AppBar, Toolbar, Paper, Table, TableHead, TableBody } from '@mui/material';
+import { Button, Stack, Grid, Fab, Divider, Typography, Box, List, ListItem, ListItemText, ListSubheader, TableCell, TableRow, AppBar, Toolbar, Paper, Table, TableHead, TableBody, Select, MenuItem, SelectChangeEvent } from '@mui/material';
 import StudentsDataService from "../../services/students.services";
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, useRoutes } from 'react-router-dom';
@@ -8,13 +8,24 @@ import AddIcon from '@mui/icons-material/Add';
 import { IGradeStudentData } from '../../types/grade.type';
 import GradesDataService from '../../services/grades.services';
 
+//Modal Imports
+import { Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
+import CourseDataService from '../../services/courses.services';
+import { ICourseData } from '../../types/course.type';
+import moment from 'moment';
+
 type State = {
   id: number;
   studentName: string;
   email: string;
   phone: string;
   nationalId: number;
+
   scores: Array<IGradeStudentData>;
+
+  courses: Array<ICourseData>,
+  studentId: number;
+
 };
 
 type Props = {
@@ -31,10 +42,13 @@ const View = (props: IStudentProp & Props) => {
     email: '',
     phone: '',
     nationalId: 0,
-    scores: []
+
+    scores: [],
+    courses: [],
+    studentId: Number(id)
   });
 
-  const { studentName, email, phone, nationalId, scores } = state;
+  const { studentName, email, phone, nationalId, scores, courses } = state;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,6 +67,13 @@ const View = (props: IStudentProp & Props) => {
           ...prevState,
           scores: score.data,
         }));
+
+        const course = await CourseDataService.getAll(state.id.toString());
+        setState((prevState) => ({
+          ...prevState,
+          courses: course.data,
+        }));
+
       } catch (e) {
         console.error(e);
       }
@@ -64,8 +85,14 @@ const View = (props: IStudentProp & Props) => {
     navigate(-1);
   }
 
-  console.log(scores);
-  
+  // AddCourse Modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedCourse, setSelectedCourse] = useState('-- Seleccione un curso --');
+
+  const handleCourseChange = (event: SelectChangeEvent<string>) => {
+    setSelectedCourse(event.target.value as string);
+  }
+
   return (
     <>
       <Typography
@@ -95,7 +122,43 @@ const View = (props: IStudentProp & Props) => {
             Cursos
           </Typography>
           <Fab size='small' color="secondary" aria-label="add" href="">
-            <AddIcon />
+            <AddIcon
+              onClick={() => setIsModalOpen(true)}
+            />
+            {/* MODAL */}
+            {isModalOpen && (
+              <Dialog open={isModalOpen} PaperProps={{ style: { minWidth: '400px' } }} onClose={() => setIsModalOpen(false)}>
+                <DialogTitle>Agregar nuevo curso</DialogTitle>
+                <DialogContent>
+                  <Select fullWidth
+                    label='courses'
+                    value={selectedCourse}
+                    onChange={handleCourseChange}
+                  >
+                    <MenuItem disabled value="-- Seleccione un curso --">
+                      -- Seleccione un curso --
+                    </MenuItem>
+
+                    {courses.map((course: ICourseData, index: number) => (
+
+                      <MenuItem
+                        key={course.course_id}
+                        value={course.course_name}
+                      >
+                        {course.course_name}
+                      </MenuItem>
+
+                    ))}
+
+                  </Select>
+                </DialogContent>
+                <DialogActions>
+                  <Button variant='contained' color='primary' onClick={() => setIsModalOpen(false)}>Agregar</Button>
+                  <Button variant='contained' color='error' onClick={() => setIsModalOpen(false)}>Cancelar</Button>
+                </DialogActions>
+              </Dialog>
+            )}
+            {/* FIN MODAL */}
           </Fab>
         </Toolbar>
       </AppBar>
@@ -144,6 +207,7 @@ const View = (props: IStudentProp & Props) => {
               </TableBody>
             </Table>
           </Paper>
+
         </Grid >
       </Paper >
       <br />
