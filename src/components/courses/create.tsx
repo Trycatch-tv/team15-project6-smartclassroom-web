@@ -40,10 +40,10 @@ export default class Create extends Component<Props, State> {
 
   onSave = () => {
     const currentElement: ICourseData = {
-      course_description: this.state.course_description,
-      end_date: this.state.end_date,
-      start_date: this.state.start_date,
-      course_name: this.state.course_name,
+      courseDescription: this.state.course_description,
+      endDate: this.state.end_date,
+      startDate: this.state.start_date,
+      courseName: this.state.course_name,
       teacher: this.state.teacher,
     };
     CourseDataService.create(currentElement).then((response: any) => {

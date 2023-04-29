@@ -68,11 +68,12 @@ const View = (props: IStudentProp & Props) => {
           scores: score.data,
         }));
 
-        const course = await CourseDataService.getAll(state.id.toString());
+        const coursesNotEnrolled = await CourseDataService.getCoursesNotEnrolled(state.id);
         setState((prevState) => ({
           ...prevState,
-          courses: course.data,
+          courses: coursesNotEnrolled.data,
         }));
+
 
       } catch (e) {
         console.error(e);
@@ -142,10 +143,10 @@ const View = (props: IStudentProp & Props) => {
                     {courses.map((course: ICourseData, index: number) => (
 
                       <MenuItem
-                        key={course.course_id}
-                        value={course.course_name}
+                        key={course.courseId}
+                        value={course.courseName}
                       >
-                        {course.course_name}
+                        {course.courseName}
                       </MenuItem>
 
                     ))}

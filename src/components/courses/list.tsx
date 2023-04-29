@@ -193,11 +193,11 @@ export default class List extends Component<Props, State> {
                   </TableHead>
                   <TableBody>
                     {courses.map((course: ICourseDataListElement, index: number) => (
-                      <TableRow key={course.id}>
+                      <TableRow key={course.courseId}>
                         <TableCell component="th" scope="row">
-                          {course.name}
+                          {course.courseName}
                         </TableCell>
-                        <TableCell align="left">{course.description}</TableCell>
+                        <TableCell align="left">{course.courseDescription}</TableCell>
                         <TableCell align="right">
                           {moment(course.startDate).format("YYYY-MM-DD")}
                         </TableCell>
@@ -206,17 +206,17 @@ export default class List extends Component<Props, State> {
                         </TableCell>
                         <TableCell align="left">{course.teacher}</TableCell>
                         <TableCell className="noWrap">
-                          <Link to={`/courses/${course.id}`}>
+                          <Link to={`/courses/${course.courseId}`}>
                             <Button variant="contained" color="primary" className='listButton'>
                               <ViewIcon />
                             </Button>
                           </Link>
-                          <Link to={`/courses/edit/${course.id}`}>
+                          <Link to={`/courses/edit/${course.courseId}`}>
                             <Button variant="contained" color="secondary" className='listButton'>
                               <EditIcon />
                             </Button>
                           </Link>
-                          <Button variant="contained" color="error" className='listButton' onClick={() => { this.setActiveCourseToDelete(course.id, course.name); }}>
+                          <Button variant="contained" color="error" className='listButton' onClick={() => { this.setActiveCourseToDelete(course.courseId, course.courseName); }}>
                             <DeleteIcon />
                           </Button>
                         </TableCell>

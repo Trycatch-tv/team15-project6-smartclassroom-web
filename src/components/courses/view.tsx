@@ -49,10 +49,10 @@ const View = (props: ICourseProp & Props) => {
         const response = await CourseDataService.get(state.course_id);
         setState((prevState) => ({
           ...prevState,
-          course_description: response.data.course_description,
-          end_date: moment(response.data.end_date).toDate(),
-          start_date: moment(response.data.start_date).toDate(),
-          course_name: response.data.course_name,
+          course_description: response.data.courseDescription,
+          end_date: moment(response.data.endDate).toDate(),
+          start_date: moment(response.data.startDate).toDate(),
+          course_name: response.data.courseName,
           teacher: response.data.teacher,
         }));
 

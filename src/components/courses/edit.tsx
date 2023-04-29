@@ -38,11 +38,11 @@ const Edit = (props: ICourseProp & Props) => {
         const response = await CourseDataService.get(state.course_id);
         const data = response.data;
         setState({
-          course_id: data.course_id,
-          course_description: data.course_description,
-          end_date: moment(data.end_date).toDate(),
-          start_date: moment(data.start_date).toDate(),
-          course_name: data.course_name,
+          course_id: data.courseId,
+          course_description: data.courseDescription,
+          end_date: moment(data.endDate).toDate(),
+          start_date: moment(data.startDate).toDate(),
+          course_name: data.courseName,
           teacher: data.teacher
         });
       } catch (e: any) {
@@ -54,10 +54,10 @@ const Edit = (props: ICourseProp & Props) => {
 
   const onSave = async () => {
     const currentElement: ICourseData = {
-      course_description: state.course_description,
-      end_date: state.end_date,
-      start_date: state.start_date,
-      course_name: state.course_name,
+      courseDescription: state.course_description,
+      endDate: state.end_date,
+      startDate: state.start_date,
+      courseName: state.course_name,
       teacher: state.teacher
     };
     try {
