@@ -1,5 +1,5 @@
-import { Component} from "react";
-import { Button, Stack, Grid, Fab, Divider, Typography, Box, List, ListItem, ListItemText, ListSubheader, TableCell, TableRow, AppBar, Toolbar, Paper, Table, TableHead, TableBody } from '@mui/material';
+import { Component } from "react";
+import { Button, Stack, Grid, Fab, Divider, Typography, Box, List, ListItem, ListItemText, ListSubheader, TableCell, TableRow, AppBar, Toolbar, Paper, Table, TableHead, TableBody, Select, MenuItem, SelectChangeEvent } from '@mui/material';
 import moment from 'moment';
 import CourseDataService from "../../services/courses.services";
 import GradesDataService from "../../services/grades.services";
@@ -13,7 +13,13 @@ import { stat } from "fs";
 import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
 
+//Modal Imports
+import { Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
+import StudentsDataService from '../../services/students.services';
+import { IStudentData } from '../../types/student.type';
+
 type State = {
+  id: number;
   course_id: number;
   course_description: string;
   end_date: Date;
@@ -21,6 +27,8 @@ type State = {
   course_name: string;
   teacher: string;
   students: IGradeCourseData[];
+
+  studentsNE: Array<IStudentData>;
 };
 
 type Props = {
@@ -28,10 +36,11 @@ type Props = {
 };
 
 const View = (props: ICourseProp & Props) => {
-  const { id } = useParams<{id: string}>();
+  const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
   const [state, setState] = useState<State>({
+    id: Number(id),
     course_id: Number(id),
     course_description: '',
     end_date: new Date(),
@@ -39,9 +48,11 @@ const View = (props: ICourseProp & Props) => {
     course_name: '',
     teacher: '',
     students: [],
+
+    studentsNE: []
   });
 
-  const { course_name, course_description, teacher, start_date, end_date, students } = state;
+  const { course_name, course_description, teacher, start_date, end_date, students, studentsNE } = state;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -61,6 +72,13 @@ const View = (props: ICourseProp & Props) => {
           ...prevState,
           students: score.data,
         }));
+
+        const studentsNotEnrolled = await CourseDataService.getStudentsNotEnrolled(state.course_id);
+        setState((prevState) => ({
+          ...prevState,
+          studentsNE: studentsNotEnrolled.data,
+        }));
+
       } catch (e) {
         console.error(e);
       }
@@ -72,27 +90,50 @@ const View = (props: ICourseProp & Props) => {
     navigate(-1);
   }
 
+  // AddStudent Modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  let [selectedStudentId, setSelectedStudentId] = useState('')
+
+  const handleStudentChange = (event: SelectChangeEvent<string>) => {
+    const studentId = event.target.value as string;
+    setSelectedStudentId(studentId);
+    console.log('El ID del curso seleccionado es: ', studentId);
+  }
+
+  const handleAddNewCourse = () => {
+    console.log('Hola, estoy añadiendo un nuevo curso con ID: ', selectedStudentId);
+    
+    // const currentElement: IRegistrationData = {
+    //   student_id: Number(id),
+    //   course_id: Number(selectedCourseId)
+    // };
+    // RegistrationDataService.create(currentElement)
+    setIsModalOpen(false);
+  }
+
+
   return (
     <>
-    <Typography
+      <Typography
         component="h1"
         variant="h5"
         color="inherit"
         noWrap
         sx={{ flexGrow: 1, paddingLeft: '0px', paddingTop: '15px', fontWeight: 'bold' }}
-        > {course_name}
-    </Typography>
-    <Divider /><br />
-    <Typography sx={{ marginBottom: '10px' }} color="inherit" noWrap><b>Descripción:</b> {course_description}</Typography>
-    <Typography sx={{ marginBottom: '10px' }} color="inherit" noWrap><b>Profesor:</b> {teacher}</Typography>
+      > {course_name}
+      </Typography>
+      <Divider /><br />
+      <Typography sx={{ marginBottom: '10px' }} color="inherit" noWrap><b>Descripción:</b> {course_description}</Typography>
+      <Typography sx={{ marginBottom: '10px' }} color="inherit" noWrap><b>Profesor:</b> {teacher}</Typography>
 
-    <Stack spacing={2} direction="row" sx={{marginBottom: 4}}>
-    <Typography color="inherit" noWrap><b>Inicio:</b> {moment(start_date).format('YYYY-MM-DD')}</Typography>
-    <Typography color="inherit" noWrap><b>Fin:</b> {moment(end_date).format('YYYY-MM-DD')}</Typography>
-    </Stack>
-    <Button sx={{ marginBottom: '10px' }} variant="contained" color="error" type="button" onClick={onClose}>Volver</Button>
-    <br />
-    <AppBar position='static'>
+      <Stack spacing={2} direction="row" sx={{ marginBottom: 4 }}>
+        <Typography color="inherit" noWrap><b>Inicio:</b> {moment(start_date).format('YYYY-MM-DD')}</Typography>
+        <Typography color="inherit" noWrap><b>Fin:</b> {moment(end_date).format('YYYY-MM-DD')}</Typography>
+      </Stack>
+      <Button sx={{ marginBottom: '10px' }} variant="contained" color="error" type="button" onClick={onClose}>Volver</Button>
+      <br />
+      <AppBar position='static'>
         <Toolbar>
           <Typography
             component="h2"
@@ -104,7 +145,41 @@ const View = (props: ICourseProp & Props) => {
             Estudiantes
           </Typography>
           <Fab size='small' color="secondary" aria-label="add" href="">
-            <AddIcon />
+            <AddIcon
+            onClick={()=> setIsModalOpen(true)}
+            />
+            {isModalOpen && (
+              <Dialog open={isModalOpen} PaperProps={{ style: { minWidth: '400px' } }} onClose={() => setIsModalOpen(false)}>
+                <DialogTitle>Agregar nuevo curso</DialogTitle>
+                <DialogContent>
+                  <Select fullWidth
+                    label='courses'
+                    value={selectedStudentId}
+                    onChange={handleStudentChange}
+                  >
+                    <MenuItem disabled>
+                      -- Seleccione un estudiante --
+                    </MenuItem>
+
+                    {studentsNE.map((studentNE: IStudentData, index: number) => (
+
+                      <MenuItem
+                        key={studentNE.id}
+                        value={studentNE.id}
+                      >
+                        {studentNE.studentName}
+                      </MenuItem>
+
+                    ))}
+
+                  </Select>
+                </DialogContent>
+                <DialogActions>
+                  <Button variant='contained' color='primary' onClick={() => handleAddNewCourse()}>Agregar</Button>
+                  <Button variant='contained' color='error' onClick={() => setIsModalOpen(false)}>Cancelar</Button>
+                </DialogActions>
+              </Dialog>
+            )}
           </Fab>
         </Toolbar>
       </AppBar>
@@ -151,7 +226,7 @@ const View = (props: ICourseProp & Props) => {
                     </TableCell>
                     <TableCell className="noWrap">
                       <Button variant="contained" color="secondary" className='listButton' >
-                      {/* onClick={() => { this.setActiveGradesToUpdate(score.studentId, score.studentName); }} */}
+                        {/* onClick={() => { this.setActiveGradesToUpdate(score.studentId, score.studentName); }} */}
                         <EditIcon />
                       </Button>
                     </TableCell>
@@ -164,7 +239,7 @@ const View = (props: ICourseProp & Props) => {
       </Paper >
       <br />
     </>
-);
+  );
 };
 
 export default View;

@@ -2,6 +2,7 @@ import { AxiosResponse } from "axios";
 import http from "../http-common";
 import { ICourseData } from "../types/course.type"
 import { IDashboardCoursesCountData } from "../types/dashboard.types"
+import { IStudentData } from "../types/student.type";
 
 class CourseDataService {
   create(data: ICourseData): Promise<AxiosResponse<ICourseData, any>> {
@@ -18,6 +19,10 @@ class CourseDataService {
 
   getCoursesNotEnrolled(id: number): Promise<AxiosResponse<Array<ICourseData>, any>> {
     return http.get<Array<ICourseData>>(`/courses/getCoursesNotEnrolled?studentId=${id}`);
+  }
+
+  getStudentsNotEnrolled(id: number): Promise<AxiosResponse<Array<IStudentData>, any>> {
+    return http.get<Array<IStudentData>>(`/courses/not-enrolled-students?courseId=${id}`);
   }
 
   get(id: number): Promise<AxiosResponse<ICourseData, any>> {

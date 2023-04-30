@@ -7,12 +7,14 @@ import AddIcon from '@mui/icons-material/Add';
 
 import { IGradeStudentData } from '../../types/grade.type';
 import GradesDataService from '../../services/grades.services';
+import RegistrationDataService from '../../services/registration.services';
+import { IRegistrationData } from '../../types/registration.type';
+
 
 //Modal Imports
 import { Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 import CourseDataService from '../../services/courses.services';
 import { ICourseData } from '../../types/course.type';
-import moment from 'moment';
 
 type State = {
   id: number;
@@ -75,6 +77,7 @@ const View = (props: IStudentProp & Props) => {
         }));
 
 
+
       } catch (e) {
         console.error(e);
       }
@@ -88,10 +91,23 @@ const View = (props: IStudentProp & Props) => {
 
   // AddCourse Modal
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedCourse, setSelectedCourse] = useState('-- Seleccione un curso --');
+  let [selectedCourseId, setSelectedCourseId] = useState('')
 
   const handleCourseChange = (event: SelectChangeEvent<string>) => {
-    setSelectedCourse(event.target.value as string);
+    const courseId = event.target.value as string;
+    setSelectedCourseId(courseId);
+    console.log('El ID del curso seleccionado es: ', courseId);
+  }
+
+  const handleAddNewCourse = () => {
+    console.log('Hola, estoy añadiendo un nuevo curso con ID: ', selectedCourseId);
+    
+    // const currentElement: IRegistrationData = {
+    //   student_id: Number(id),
+    //   course_id: Number(selectedCourseId)
+    // };
+    // RegistrationDataService.create(currentElement)
+    setIsModalOpen(false);
   }
 
   return (
@@ -133,10 +149,10 @@ const View = (props: IStudentProp & Props) => {
                 <DialogContent>
                   <Select fullWidth
                     label='courses'
-                    value={selectedCourse}
+                    value={selectedCourseId}
                     onChange={handleCourseChange}
                   >
-                    <MenuItem disabled value="-- Seleccione un curso --">
+                    <MenuItem disabled>
                       -- Seleccione un curso --
                     </MenuItem>
 
@@ -144,7 +160,7 @@ const View = (props: IStudentProp & Props) => {
 
                       <MenuItem
                         key={course.courseId}
-                        value={course.courseName}
+                        value={course.courseId}
                       >
                         {course.courseName}
                       </MenuItem>
@@ -154,7 +170,7 @@ const View = (props: IStudentProp & Props) => {
                   </Select>
                 </DialogContent>
                 <DialogActions>
-                  <Button variant='contained' color='primary' onClick={() => setIsModalOpen(false)}>Agregar</Button>
+                  <Button variant='contained' color='primary' onClick={() => handleAddNewCourse()}>Agregar</Button>
                   <Button variant='contained' color='error' onClick={() => setIsModalOpen(false)}>Cancelar</Button>
                 </DialogActions>
               </Dialog>
