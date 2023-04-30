@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 import http from "../http-common";
-import { IGradeCourseData, IGradeStudentData } from "../types/grade.type"
+import { IGradeCourseData, IGradeStudentData, IGradesData } from "../types/grade.type"
 
 class GradesDataService {
   getStudent(id: number) : Promise<AxiosResponse<Array<IGradeStudentData>, any>> {
@@ -10,5 +10,10 @@ class GradesDataService {
   getCourse(id: number) : Promise<AxiosResponse<Array<IGradeCourseData>, any>> {
     return http.get<Array<IGradeCourseData>>(`/grades/courses/${id}`);
   }
+
+  updateGrades(data: IGradesData) {
+    return http.put<any>('/grades/', data);
+  }
 }
+
 export default new GradesDataService();
