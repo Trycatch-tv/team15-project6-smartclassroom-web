@@ -7,15 +7,17 @@ import AddIcon from '@mui/icons-material/Add';
 
 import { IGradeStudentData } from '../../types/grade.type';
 import GradesDataService from '../../services/grades.services';
+import RegistrationDataService from '../../services/registration.services';
+import { IRegistrationData } from '../../types/registration.type';
+
 
 //Modal Imports
 import { Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 import CourseDataService from '../../services/courses.services';
 import { ICourseData } from '../../types/course.type';
-import moment from 'moment';
 
 type State = {
-  id: number;
+  //id: number;
   studentName: string;
   email: string;
   phone: string;
@@ -25,7 +27,6 @@ type State = {
 
   courses: Array<ICourseData>,
   studentId: number;
-
 };
 
 type Props = {
@@ -37,7 +38,7 @@ const View = (props: IStudentProp & Props) => {
   const navigate = useNavigate();
 
   const [state, setState] = useState<State>({
-    id: Number(id),
+    //id: Number(id),
     studentName: '',
     email: '',
     phone: '',
@@ -53,34 +54,33 @@ const View = (props: IStudentProp & Props) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await StudentsDataService.get(state.id.toString());
+        const response = await StudentsDataService.get(state.studentId.toString());
         setState((prevState) => ({
           ...prevState,
+          studentId: response.data.studentId,
           email: response.data.email,
           phone: response.data.phone,
           studentName: response.data.studentName,
           nationalId: response.data.nationalId
         }));
 
-        const score = await GradesDataService.getStudent(state.id);
+        const score = await GradesDataService.getStudent(state.studentId);
         setState((prevState) => ({
           ...prevState,
           scores: score.data,
         }));
 
-        const coursesNotEnrolled = await CourseDataService.getCoursesNotEnrolled(state.id);
+        const coursesNotEnrolled = await CourseDataService.getCoursesNotEnrolled(state.studentId);
         setState((prevState) => ({
           ...prevState,
           courses: coursesNotEnrolled.data,
         }));
-
-
       } catch (e) {
         console.error(e);
       }
     };
     fetchData();
-  }, [props.id]);
+  }, [props.studentId]);
 
   const onClose = () => {
     navigate(-1);
@@ -88,10 +88,29 @@ const View = (props: IStudentProp & Props) => {
 
   // AddCourse Modal
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedCourse, setSelectedCourse] = useState('-- Seleccione un curso --');
+  let [selectedCourseId, setSelectedCourseId] = useState('')
 
   const handleCourseChange = (event: SelectChangeEvent<string>) => {
-    setSelectedCourse(event.target.value as string);
+    const courseId = event.target.value as string;
+    setSelectedCourseId(courseId);
+    console.log('El ID del curso seleccionado es: ', courseId);
+  }
+
+  const handleAddNewCourse = () => {
+    console.log('Hola, estoy añadiendo un nuevo curso con ID: ', selectedCourseId);
+    
+    const currentElement: IRegistrationData = {
+      studentId: Number(id),
+      courseId: Number(selectedCourseId)
+    };
+
+    RegistrationDataService.create(currentElement).then((response: any) => {
+      //setState({ redirect: true });
+    }).catch((e: Error) => {
+      console.error(e);
+    });
+
+    setIsModalOpen(false);
   }
 
   return (
@@ -133,10 +152,10 @@ const View = (props: IStudentProp & Props) => {
                 <DialogContent>
                   <Select fullWidth
                     label='courses'
-                    value={selectedCourse}
+                    value={selectedCourseId}
                     onChange={handleCourseChange}
                   >
-                    <MenuItem disabled value="-- Seleccione un curso --">
+                    <MenuItem disabled>
                       -- Seleccione un curso --
                     </MenuItem>
 
@@ -144,7 +163,7 @@ const View = (props: IStudentProp & Props) => {
 
                       <MenuItem
                         key={course.courseId}
-                        value={course.courseName}
+                        value={course.courseId}
                       >
                         {course.courseName}
                       </MenuItem>
@@ -154,7 +173,7 @@ const View = (props: IStudentProp & Props) => {
                   </Select>
                 </DialogContent>
                 <DialogActions>
-                  <Button variant='contained' color='primary' onClick={() => setIsModalOpen(false)}>Agregar</Button>
+                  <Button variant='contained' color='primary' onClick={() => handleAddNewCourse()}>Agregar</Button>
                   <Button variant='contained' color='error' onClick={() => setIsModalOpen(false)}>Cancelar</Button>
                 </DialogActions>
               </Dialog>

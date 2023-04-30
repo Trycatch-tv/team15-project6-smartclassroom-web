@@ -2,6 +2,7 @@ import { AxiosResponse } from "axios";
 import http from "../http-common";
 import { ICourseData } from "../types/course.type"
 import { IDashboardCoursesCountData } from "../types/dashboard.types"
+import { IStudentData } from "../types/student.type";
 
 class CourseDataService {
   create(data: ICourseData): Promise<AxiosResponse<ICourseData, any>> {

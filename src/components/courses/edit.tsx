@@ -8,11 +8,11 @@ import CourseDataService from "../../services/courses.services";
 import { useParams, useNavigate } from 'react-router-dom';
 
 type State = {
-  course_id: number,
-  course_name: string,
-  course_description: string,
-  start_date: Date,
-  end_date: Date,
+  courseId: number,
+  courseName: string,
+  courseDescription: string,
+  startDate: Date,
+  endDate: Date,
   teacher: string
 };
 
@@ -24,25 +24,25 @@ const Edit = (props: ICourseProp & Props) => {
   const { id } = useParams<{id: string}>();
   const navigate = useNavigate();
   const [state, setState] = useState<State>({
-    course_id: Number(id),
-    course_description: '',
-    end_date: moment(new Date()).add(3, 'months').toDate(),
-    start_date: moment(new Date()).subtract(1, 'months').toDate(),
-    course_name: '',
+    courseId: Number(id),
+    courseDescription: '',
+    endDate: moment(new Date()).add(3, 'months').toDate(),
+    startDate: moment(new Date()).subtract(1, 'months').toDate(),
+    courseName: '',
     teacher: ''
   });
 
   useEffect(() => {
     const onOpen = async () => {
       try {
-        const response = await CourseDataService.get(state.course_id);
+        const response = await CourseDataService.get(state.courseId);
         const data = response.data;
         setState({
-          course_id: data.courseId,
-          course_description: data.courseDescription,
-          end_date: moment(data.endDate).toDate(),
-          start_date: moment(data.startDate).toDate(),
-          course_name: data.courseName,
+          courseId: data.courseId,
+          courseDescription: data.courseDescription,
+          endDate: moment(data.endDate).toDate(),
+          startDate: moment(data.startDate).toDate(),
+          courseName: data.courseName,
           teacher: data.teacher
         });
       } catch (e: any) {
@@ -54,14 +54,15 @@ const Edit = (props: ICourseProp & Props) => {
 
   const onSave = async () => {
     const currentElement: ICourseData = {
-      courseDescription: state.course_description,
-      endDate: state.end_date,
-      startDate: state.start_date,
-      courseName: state.course_name,
+      courseDescription: state.courseDescription,
+      endDate: state.endDate,
+      startDate: state.startDate,
+      courseName: state.courseName,
       teacher: state.teacher
     };
+
     try {
-      await CourseDataService.update(currentElement, state.course_id);
+      await CourseDataService.update(currentElement, state.courseId);
       navigate(-1);
       //handler();
     } catch (e: any) {
@@ -75,23 +76,23 @@ const Edit = (props: ICourseProp & Props) => {
 
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    setState((prevState) => ({ ...prevState, course_name: value }));
+    setState((prevState) => ({ ...prevState, courseName: value }));
   };
 
   const onChangeDescripcion = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    setState((prevState) => ({ ...prevState, course_description: value }));
+    setState((prevState) => ({ ...prevState, courseDescription: value }));
   };
 
   const onChangeStartDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = moment(new Date(e.target.value)).toDate();
     console.log(value);
-    setState((prevState) => ({ ...prevState, start_date: value }));
+    setState((prevState) => ({ ...prevState, startDate: value }));
   };
 
   const onChangeEndDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = moment(new Date(e.target.value)).toDate();
-    setState((prevState) => ({ ...prevState, end_date: value }));
+    setState((prevState) => ({ ...prevState, endDate: value }));
   };
 
   const onChangeTeacher = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -100,7 +101,7 @@ const Edit = (props: ICourseProp & Props) => {
   };
   
   //render() {
-    const {course_name,course_description,start_date,end_date,teacher} = state;
+    const { courseName, courseDescription, startDate, endDate, teacher} = state;
     return (
       <>
         <Typography
@@ -114,20 +115,20 @@ const Edit = (props: ICourseProp & Props) => {
         <Divider /><br /><br/>
         <form onSubmit={()=>{return false;}}>
           <TextField
-            type="text" variant='outlined' value={course_name}
+            type="text" variant='outlined' value={courseName}
             color='secondary' label="Nombre"
             onChange={onChangeName}
             fullWidth required sx={{mb: 4}}
           />
           <TextField
-            type="text" variant='outlined' value={course_description}
+            type="text" variant='outlined' value={courseDescription}
             color='secondary' label="Descripcion"
             onChange={onChangeDescripcion}
             fullWidth required sx={{mb: 4}}
           />
           <Stack spacing={2} direction="row" sx={{marginBottom: 4}}>
             <TextField
-              type="date" value={moment(start_date).format('YYYY-MM-DD')}
+              type="date" value={moment(startDate).format('YYYY-MM-DD')}
               variant='outlined'
               color='secondary'
               label="Inicio"
@@ -136,7 +137,7 @@ const Edit = (props: ICourseProp & Props) => {
               required
             />
             <TextField
-              type="date" value={moment(end_date).format('YYYY-MM-DD')}
+              type="date" value={moment(endDate).format('YYYY-MM-DD')}
               variant='outlined'
               color='secondary'
               label="Fin"
