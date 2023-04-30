@@ -168,7 +168,7 @@ export default class List extends Component<Props, State> {
     const { students, currentIdToView, currentIdToEdit } = this.state;
 
     if (currentIdToEdit > 0) {
-      return (<Edit id={currentIdToEdit} handler={this.refreshList}></Edit>);
+      return (<Edit studentId={currentIdToEdit} handler={this.refreshList}></Edit>);
     } else if (currentIdToView > 0) {
       return (<View id={currentIdToView} handler={this.refreshList}></View>);
     } else {
@@ -213,7 +213,7 @@ export default class List extends Component<Props, State> {
                   </TableHead>
                   <TableBody>
                     {students.map((student: IStudentData, index: number) => (
-                      <TableRow key={student.id}>
+                      <TableRow key={student.studentId}>
                         <TableCell component="th" scope="row">
                           {student.studentName}
                         </TableCell>
@@ -221,17 +221,17 @@ export default class List extends Component<Props, State> {
                         <TableCell align="left">{student.email}</TableCell>
                         <TableCell align="left">{student.phone}</TableCell>
                         <TableCell className="noWrap">
-                          <Link to={`/students/${student.id}`}>
+                          <Link to={`/students/${student.studentId}`}>
                             <Button variant="contained" color="primary" className='listButton'>
                               <ViewIcon />
                             </Button>
                           </Link>
-                          <Link to={`/students/edit/${student.id}`}>
+                          <Link to={`/students/edit/${student.studentId}`}>
                             <Button variant="contained" color="secondary" className='listButton'>
                               <EditIcon />
                             </Button>
                           </Link>
-                          <Button variant="contained" color="error" className='listButton' onClick={() => { this.setActiveStudentToDelete(student.id, student.studentName); }}>
+                          <Button variant="contained" color="error" className='listButton' onClick={() => { this.setActiveStudentToDelete(student.studentId, student.studentName); }}>
                             <DeleteIcon />
                           </Button>
                         </TableCell>

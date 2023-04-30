@@ -17,7 +17,7 @@ import CourseDataService from '../../services/courses.services';
 import { ICourseData } from '../../types/course.type';
 
 type State = {
-  id: number;
+  //id: number;
   studentName: string;
   email: string;
   phone: string;
@@ -27,7 +27,6 @@ type State = {
 
   courses: Array<ICourseData>,
   studentId: number;
-
 };
 
 type Props = {
@@ -39,7 +38,7 @@ const View = (props: IStudentProp & Props) => {
   const navigate = useNavigate();
 
   const [state, setState] = useState<State>({
-    id: Number(id),
+    //id: Number(id),
     studentName: '',
     email: '',
     phone: '',
@@ -55,35 +54,33 @@ const View = (props: IStudentProp & Props) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await StudentsDataService.get(state.id.toString());
+        const response = await StudentsDataService.get(state.studentId.toString());
         setState((prevState) => ({
           ...prevState,
+          studentId: response.data.studentId,
           email: response.data.email,
           phone: response.data.phone,
           studentName: response.data.studentName,
           nationalId: response.data.nationalId
         }));
 
-        const score = await GradesDataService.getStudent(state.id);
+        const score = await GradesDataService.getStudent(state.studentId);
         setState((prevState) => ({
           ...prevState,
           scores: score.data,
         }));
 
-        const coursesNotEnrolled = await CourseDataService.getCoursesNotEnrolled(state.id);
+        const coursesNotEnrolled = await CourseDataService.getCoursesNotEnrolled(state.studentId);
         setState((prevState) => ({
           ...prevState,
           courses: coursesNotEnrolled.data,
         }));
-
-
-
       } catch (e) {
         console.error(e);
       }
     };
     fetchData();
-  }, [props.id]);
+  }, [props.studentId]);
 
   const onClose = () => {
     navigate(-1);
@@ -102,11 +99,17 @@ const View = (props: IStudentProp & Props) => {
   const handleAddNewCourse = () => {
     console.log('Hola, estoy añadiendo un nuevo curso con ID: ', selectedCourseId);
     
-    // const currentElement: IRegistrationData = {
-    //   student_id: Number(id),
-    //   course_id: Number(selectedCourseId)
-    // };
-    // RegistrationDataService.create(currentElement)
+    const currentElement: IRegistrationData = {
+      studentId: Number(id),
+      courseId: Number(selectedCourseId)
+    };
+
+    RegistrationDataService.create(currentElement).then((response: any) => {
+      //setState({ redirect: true });
+    }).catch((e: Error) => {
+      console.error(e);
+    });
+
     setIsModalOpen(false);
   }
 

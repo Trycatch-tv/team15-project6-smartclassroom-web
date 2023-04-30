@@ -30,6 +30,7 @@ class StudentsDataService {
   }
 
   update(data: IStudentData, id: any) {
+    console.log(id)
     return http.put<any>(`/students/${id}`, data);
   }
 }

@@ -9,10 +9,10 @@ import { Helmet } from 'react-helmet-async';
 
 type Props = {};
 type State = {
-  course_name: string,
-  course_description: string,
-  start_date: Date,
-  end_date: Date,
+  courseName: string,
+  courseDescription: string,
+  startDate: Date,
+  endDate: Date,
   teacher: string,
   redirect: boolean;
 };
@@ -29,10 +29,10 @@ export default class Create extends Component<Props, State> {
     this.onChangeTeacher = this.onChangeTeacher.bind(this);
 
     this.state = {
-      course_description: '',
-      end_date: moment(new Date()).add(3, 'months').toDate(),
-      start_date: moment(new Date()).subtract(1, 'months').toDate(),
-      course_name: '',
+      courseDescription: '',
+      endDate: moment(new Date()).add(3, 'months').toDate(),
+      startDate: moment(new Date()).subtract(1, 'months').toDate(),
+      courseName: '',
       teacher: '',
       redirect: false
     };
@@ -40,10 +40,10 @@ export default class Create extends Component<Props, State> {
 
   onSave = () => {
     const currentElement: ICourseData = {
-      courseDescription: this.state.course_description,
-      endDate: this.state.end_date,
-      startDate: this.state.start_date,
-      courseName: this.state.course_name,
+      courseDescription: this.state.courseDescription,
+      endDate: this.state.endDate,
+      startDate: this.state.startDate,
+      courseName: this.state.courseName,
       teacher: this.state.teacher,
     };
     CourseDataService.create(currentElement).then((response: any) => {
@@ -58,20 +58,20 @@ export default class Create extends Component<Props, State> {
   }
   onChangeName(e: ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;
-    this.setState({ course_name: value });
+    this.setState({ courseName: value });
   }
   onChangeDescripcion(e: ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;
-    this.setState({ course_description: value });
+    this.setState({ courseDescription: value });
   }
   onChangeStartDate(e: ChangeEvent<HTMLInputElement>) {
     const value = moment(new Date(e.target.value)).toDate();
     console.log(value);
-    this.setState({ start_date: value });
+    this.setState({ startDate: value });
   }
   onChangeEndDate(e: ChangeEvent<HTMLInputElement>) {
     const value = moment(new Date(e.target.value)).toDate();
-    this.setState({ end_date: value });
+    this.setState({ endDate: value });
   }
   onChangeTeacher(e: ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;
@@ -79,7 +79,7 @@ export default class Create extends Component<Props, State> {
   }
 
   render() {
-    const { course_name, course_description, start_date, end_date, teacher, redirect } = this.state;
+    const { courseName, courseDescription, startDate, endDate, teacher, redirect } = this.state;
     if (redirect) {
       return <Navigate to='/courses' />;
     }
@@ -99,20 +99,20 @@ export default class Create extends Component<Props, State> {
         <Divider /><br /><br />
         <form onSubmit={() => { return false; }}>
           <TextField
-            type="text" variant='outlined' value={course_name}
+            type="text" variant='outlined' value={courseName}
             color='secondary' label="Nombre"
             onChange={this.onChangeName}
             fullWidth required sx={{ mb: 4 }}
           />
           <TextField
-            type="text" variant='outlined' value={course_description}
+            type="text" variant='outlined' value={courseDescription}
             color='secondary' label="Descripcion"
             onChange={this.onChangeDescripcion}
             fullWidth required sx={{ mb: 4 }}
           />
           <Stack spacing={2} direction="row" sx={{ marginBottom: 4 }}>
             <TextField
-              type="date" value={moment(start_date).format('YYYY-MM-DD')}
+              type="date" value={moment(startDate).format('YYYY-MM-DD')}
               variant='outlined'
               color='secondary'
               label="Inicio"
@@ -121,7 +121,7 @@ export default class Create extends Component<Props, State> {
               required
             />
             <TextField
-              type="date" value={moment(end_date).format('YYYY-MM-DD')}
+              type="date" value={moment(endDate).format('YYYY-MM-DD')}
               variant='outlined'
               color='secondary'
               label="Fin"

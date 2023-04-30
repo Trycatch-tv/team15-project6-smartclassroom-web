@@ -1,12 +1,12 @@
 export interface IStudentData {
-  id?: any | null,
+  studentId?: any | null,
   studentName: string,
+  nationalId: number,
   email: string,
-  phone: string,
-  nationalId: number
+  phone: string
 }
 
 export interface IStudentProp {
-  id: number,
+  studentId: number,
   handler: () => void | null
 }

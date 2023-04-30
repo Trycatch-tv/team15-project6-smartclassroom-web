@@ -19,12 +19,12 @@ import StudentsDataService from '../../services/students.services';
 import { IStudentData } from '../../types/student.type';
 
 type State = {
-  id: number;
-  course_id: number;
-  course_description: string;
-  end_date: Date;
-  start_date: Date;
-  course_name: string;
+  //id: number;
+  courseId: number;
+  courseDescription: string;
+  endDate: Date;
+  startDate: Date;
+  courseName: string;
   teacher: string;
   students: IGradeCourseData[];
 
@@ -40,40 +40,40 @@ const View = (props: ICourseProp & Props) => {
   const navigate = useNavigate();
 
   const [state, setState] = useState<State>({
-    id: Number(id),
-    course_id: Number(id),
-    course_description: '',
-    end_date: new Date(),
-    start_date: new Date(),
-    course_name: '',
+    //id: Number(id),
+    courseId: Number(id),
+    courseDescription: '',
+    endDate: new Date(),
+    startDate: new Date(),
+    courseName: '',
     teacher: '',
     students: [],
 
     studentsNE: []
   });
 
-  const { course_name, course_description, teacher, start_date, end_date, students, studentsNE } = state;
+  const { courseName, courseDescription, teacher, startDate, endDate, students, studentsNE } = state;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await CourseDataService.get(state.course_id);
+        const response = await CourseDataService.get(state.courseId);
         setState((prevState) => ({
           ...prevState,
-          course_description: response.data.courseDescription,
-          end_date: moment(response.data.endDate).toDate(),
-          start_date: moment(response.data.startDate).toDate(),
-          course_name: response.data.courseName,
+          courseDescription: response.data.courseDescription,
+          endDate: moment(response.data.endDate).toDate(),
+          startDate: moment(response.data.startDate).toDate(),
+          courseName: response.data.courseName,
           teacher: response.data.teacher,
         }));
 
-        const score = await GradesDataService.getCourse(state.course_id);
+        const score = await GradesDataService.getCourse(state.courseId);
         setState((prevState) => ({
           ...prevState,
           students: score.data,
         }));
 
-        const studentsNotEnrolled = await StudentsDataService.getStudentsNotEnrolled(state.id);
+        const studentsNotEnrolled = await StudentsDataService.getStudentsNotEnrolled(state.courseId);
         setState((prevState) => ({
           ...prevState,
           studentsNE: studentsNotEnrolled.data,
@@ -100,7 +100,7 @@ const View = (props: ICourseProp & Props) => {
   const handleStudentChange = (event: SelectChangeEvent<string>) => {
     const studentId = event.target.value as string;
     setSelectedStudentId(studentId);
-    console.log('El ID del curso seleccionado es: ', studentId);
+    console.log('El ID del estudiante seleccionado es: ', studentId);
   }
 
   const handleAddNewCourse = () => {
@@ -123,15 +123,15 @@ const View = (props: ICourseProp & Props) => {
         color="inherit"
         noWrap
         sx={{ flexGrow: 1, paddingLeft: '0px', paddingTop: '15px', fontWeight: 'bold' }}
-      > {course_name}
+      > {courseName}
       </Typography>
       <Divider /><br />
-      <Typography sx={{ marginBottom: '10px' }} color="inherit" noWrap><b>Descripción:</b> {course_description}</Typography>
+      <Typography sx={{ marginBottom: '10px' }} color="inherit" noWrap><b>Descripción:</b> {courseDescription}</Typography>
       <Typography sx={{ marginBottom: '10px' }} color="inherit" noWrap><b>Profesor:</b> {teacher}</Typography>
 
       <Stack spacing={2} direction="row" sx={{ marginBottom: 4 }}>
-        <Typography color="inherit" noWrap><b>Inicio:</b> {moment(start_date).format('YYYY-MM-DD')}</Typography>
-        <Typography color="inherit" noWrap><b>Fin:</b> {moment(end_date).format('YYYY-MM-DD')}</Typography>
+        <Typography color="inherit" noWrap><b>Inicio:</b> {moment(startDate).format('YYYY-MM-DD')}</Typography>
+        <Typography color="inherit" noWrap><b>Fin:</b> {moment(endDate).format('YYYY-MM-DD')}</Typography>
       </Stack>
       <Button sx={{ marginBottom: '10px' }} variant="contained" color="error" type="button" onClick={onClose}>Volver</Button>
       <br />
@@ -146,9 +146,9 @@ const View = (props: ICourseProp & Props) => {
           >
             Estudiantes
           </Typography>
-          <Fab size='small' color="secondary" aria-label="add" href="">
+          {/* <Fab size='small' color="secondary" aria-label="add" href="">
             <AddIcon
-            onClick={()=> setIsModalOpen(true)}
+              onClick={()=> setIsModalOpen(true)}
             />
             {isModalOpen && (
               <Dialog open={isModalOpen} PaperProps={{ style: { minWidth: '400px' } }} onClose={() => setIsModalOpen(false)}>
@@ -166,10 +166,10 @@ const View = (props: ICourseProp & Props) => {
                     {studentsNE.map((studentNE: IStudentData, index: number) => (
 
                       <MenuItem
-                        key={studentNE.id}
-                        value={studentNE.id}
+                        key={studentNE.studentId}
+                        value={studentNE.studentId}
                       >
-                        {studentNE.email}
+                        {studentNE.studentName}
                       </MenuItem>
 
                     ))}
@@ -182,7 +182,7 @@ const View = (props: ICourseProp & Props) => {
                 </DialogActions>
               </Dialog>
             )}
-          </Fab>
+          </Fab> */}
         </Toolbar>
       </AppBar>
       <Paper elevation={1}>

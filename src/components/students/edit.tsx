@@ -7,7 +7,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 type State = {
-  id: number,
+  studentId: number,
   studentName: string,
   email: string,
   phone: string,
@@ -28,7 +28,7 @@ const Edit = (props: IStudentProp & Props) => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [state, setState] = useState<State>({
-    id: Number(id),
+    studentId: Number(id),
     studentName: '',
     email: '',
     phone: '',
@@ -38,10 +38,11 @@ const Edit = (props: IStudentProp & Props) => {
   useEffect(() => {
     const onOpen = async () => {
       try {
-        const response = await StudentsDataService.get(state.id.toString());
+        const response = await StudentsDataService.get(state.studentId.toString());
         const data = response.data;
+        console.log(data)
         setState({
-          id: data.id,
+          studentId: data.studentId,
           studentName: data.studentName,
           email: data.email,
           phone: data.phone,
@@ -65,7 +66,8 @@ const Edit = (props: IStudentProp & Props) => {
     };
 
     try {
-      await StudentsDataService.update(currentElement, state.id);
+      console.log(id)
+      await StudentsDataService.update(currentElement, state.studentId);
       navigate(-1);
       //handler();
     } catch (e: any) {
