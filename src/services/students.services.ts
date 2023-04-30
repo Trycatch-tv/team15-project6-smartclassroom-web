@@ -22,7 +22,7 @@ class StudentsDataService {
   }
 
   getStudentsNotEnrolled(id: number): Promise<AxiosResponse<Array<IStudentData>, any>> {
-    return http.get<Array<IStudentData>>(`/courses/not-enrolled-students?courseId=${id}`);
+    return http.get<Array<IStudentData>>(`/students/getStudentsNotInCourse?courseId=${id}`);
   }
 
   delete(id: any) {

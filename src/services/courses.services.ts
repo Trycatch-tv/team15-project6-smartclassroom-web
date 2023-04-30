@@ -21,10 +21,6 @@ class CourseDataService {
     return http.get<Array<ICourseData>>(`/courses/getCoursesNotEnrolled?studentId=${id}`);
   }
 
-  getStudentsNotEnrolled(id: number): Promise<AxiosResponse<Array<IStudentData>, any>> {
-    return http.get<Array<IStudentData>>(`/courses/not-enrolled-students?courseId=${id}`);
-  }
-
   get(id: number): Promise<AxiosResponse<ICourseData, any>> {
     return http.get<ICourseData>(`/courses/${id}`);
   }

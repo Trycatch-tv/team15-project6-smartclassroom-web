@@ -73,12 +73,14 @@ const View = (props: ICourseProp & Props) => {
           students: score.data,
         }));
 
-        const studentsNotEnrolled = await CourseDataService.getStudentsNotEnrolled(state.course_id);
+        const studentsNotEnrolled = await StudentsDataService.getStudentsNotEnrolled(state.id);
         setState((prevState) => ({
           ...prevState,
           studentsNE: studentsNotEnrolled.data,
         }));
 
+        console.log(studentsNotEnrolled);
+        
       } catch (e) {
         console.error(e);
       }
@@ -150,10 +152,10 @@ const View = (props: ICourseProp & Props) => {
             />
             {isModalOpen && (
               <Dialog open={isModalOpen} PaperProps={{ style: { minWidth: '400px' } }} onClose={() => setIsModalOpen(false)}>
-                <DialogTitle>Agregar nuevo curso</DialogTitle>
+                <DialogTitle>Agregar nuevo estudiante</DialogTitle>
                 <DialogContent>
                   <Select fullWidth
-                    label='courses'
+                    label='students'
                     value={selectedStudentId}
                     onChange={handleStudentChange}
                   >
@@ -167,7 +169,7 @@ const View = (props: ICourseProp & Props) => {
                         key={studentNE.id}
                         value={studentNE.id}
                       >
-                        {studentNE.studentName}
+                        {studentNE.email}
                       </MenuItem>
 
                     ))}
