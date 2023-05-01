@@ -98,18 +98,18 @@ const View = (props: IStudentProp & Props) => {
 
   const handleAddNewCourse = () => {
     console.log('Hola, estoy añadiendo un nuevo curso con ID: ', selectedCourseId);
-    
+
     const currentElement: IRegistrationData = {
       studentId: Number(id),
       courseId: Number(selectedCourseId)
     };
 
     RegistrationDataService.create(currentElement).then((response: any) => {
-      //setState({ redirect: true });
+      window.location.reload();
     }).catch((e: Error) => {
       console.error(e);
     });
-
+    
     setIsModalOpen(false);
   }
 

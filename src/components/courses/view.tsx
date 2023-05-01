@@ -80,7 +80,7 @@ const View = (props: ICourseProp & Props) => {
         }));
 
         console.log(studentsNotEnrolled);
-        
+
       } catch (e) {
         console.error(e);
       }
@@ -103,17 +103,10 @@ const View = (props: ICourseProp & Props) => {
     console.log('El ID del estudiante seleccionado es: ', studentId);
   }
 
-  const handleAddNewCourse = () => {
-    console.log('Hola, estoy añadiendo un nuevo curso con ID: ', selectedStudentId);
+  const setScore = () => {
+    console.log('Hola desde Edicion de notas');
     
-    // const currentElement: IRegistrationData = {
-    //   student_id: Number(id),
-    //   course_id: Number(selectedCourseId)
-    // };
-    // RegistrationDataService.create(currentElement)
-    setIsModalOpen(false);
   }
-
 
   return (
     <>
@@ -227,9 +220,36 @@ const View = (props: ICourseProp & Props) => {
                       {score.final}
                     </TableCell>
                     <TableCell className="noWrap">
-                      <Button variant="contained" color="secondary" className='listButton' >
+                      <Button variant="contained" color="secondary" className='listButton'>
                         {/* onClick={() => { this.setActiveGradesToUpdate(score.studentId, score.studentName); }} */}
-                        <EditIcon />
+                        <EditIcon onClick={() => setIsModalOpen(true)} />
+                        {/* MODAL */}
+                        {isModalOpen && (
+                          <Dialog open={isModalOpen} PaperProps={{ style: { minWidth: '400px', height: 'auto' } }} onClose={() => setIsModalOpen(false)}>
+                            <DialogTitle>Editar notas</DialogTitle>
+                            <DialogContent>
+                              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '10px' }}>
+                                <TextField
+                                  label="Nombre del estudiante"
+                                  value={score.studentName}
+                                  onChange={(event) => setScore()}
+                                  // { ...score, studentName: event.target.value } esto va dentro de setScore
+                                />
+                                <TextField label="Nota 1" value={score.grade1} />
+                                <TextField label="Nota 2" value={score.grade2} />
+                                <TextField label="Nota 3" value={score.grade3} />
+                                <TextField label="Nota 4" value={score.grade4} />
+                                <TextField label="Nota 5" value={score.grade5} />
+                                <TextField label="Nota 6" value={score.final} />
+                              </div>
+                            </DialogContent>
+                            <DialogActions>
+                              <Button variant='contained' color='primary' onClick={() => setIsModalOpen(false)}>Agregar</Button>
+                              <Button variant='contained' color='error' onClick={() => setIsModalOpen(false)}>Cancelar</Button>
+                            </DialogActions>
+                          </Dialog>
+                        )}
+                        {/* FIN MODAL */}
                       </Button>
                     </TableCell>
                   </TableRow>
